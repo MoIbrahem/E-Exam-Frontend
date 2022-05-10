@@ -9,6 +9,8 @@ import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import ResetpasswordForm from "./components/ResetpasswordForm";
+import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
 import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
@@ -34,6 +36,8 @@ class App extends Component {
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
+            <Route path="/reset-password" component={ResetpasswordForm} />
+            <Route path="/password/reset/confirm/:uid/:token" component={ResetpasswordconfirmForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route
