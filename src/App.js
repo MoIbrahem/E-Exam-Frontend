@@ -6,9 +6,11 @@ import MovieForm from "./components/movieForm";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
+import UserProfile from './components/userProfile';
 import NavBar from "./components/navBar";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import UserEditForm from './components/userEditForm';
 import ResetpasswordForm from "./components/ResetpasswordForm";
 import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
 import Logout from "./components/logout";
@@ -35,6 +37,8 @@ class App extends Component {
         <main className="container">
           <Switch>
             <Route path="/register" component={RegisterForm} />
+            <Route path="/profile" component={UserProfile} />
+            <Route path="/edit-user" component={UserEditForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/reset-password" component={ResetpasswordForm} />
             <Route path="/password/reset/confirm/:uid/:token" component={ResetpasswordconfirmForm} />

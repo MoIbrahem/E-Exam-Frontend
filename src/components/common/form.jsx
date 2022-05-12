@@ -55,6 +55,13 @@ class Form extends Component {
       </button>
     );
   }
+  renderEditButton(label) {
+    return (
+      <button className="btn btn-primary">
+        {label}
+      </button>
+    );
+  }
 
   renderSelect(name, label, options) {
     const { data, errors } = this.state;
@@ -71,7 +78,7 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text") {
+  renderInput(name, label, type = "text",defaultValue) {
     const { data, errors } = this.state;
 
     return (
@@ -82,6 +89,21 @@ class Form extends Component {
         label={label}
         onChange={this.handleChange}
         error={errors[name]}
+      />
+    );
+  }
+
+  renderControlledInput(name, label, placeholder, type = "text"){
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+        placeholder= {placeholder}
       />
     );
   }
