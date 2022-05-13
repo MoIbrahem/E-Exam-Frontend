@@ -36,10 +36,15 @@ class UserProfile extends Component {
           </tbody>
         </table>
           <p className="mt-3">
-            <Link to="/change-password">Change Password</Link>
+            <Link to="/change-password"
+            className="btn btn-primary"
+            >Change Password</Link>
+            
           </p>
           <p className="mt-3">
-            <Link to="/edit-user">Update user information</Link>
+            <Link to="/edit-user"
+            className="btn btn-primary"
+            >Update user information</Link>
           </p>
         <h4>Student Information</h4>
         <table>
@@ -61,20 +66,19 @@ class UserProfile extends Component {
             </tr>
             <tr>
               <td>Overall Rank: {`${this.state.student.overall_level_rank}`}</td>
-              <div style={{ margin: "right" }}>
-                <Link
-                  to="/edit-student-information"
-                  className="btn btn-primary"
-                >
-                  Edit
-                </Link>
-              </div>
             </tr>
             
           </tbody>
           
         </table>
-        
+        <p className="mt-3">
+                <Link
+                  to="/edit-student-information"
+                  className="btn btn-primary"
+                >
+                  Update student information
+                </Link>
+        </p>
       </div>
     );
   }
