@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+//import { Link, Redirect } from "react-router-dom";
 import auth from "../services/authService";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userEditService from "../services/userEditService";
-import { first, last } from "lodash";
+
 
 class UserEditForm extends Form {
   state = {
@@ -23,11 +23,11 @@ class UserEditForm extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const response = await userEditService.edit(data);
+      await userEditService.edit(data);
 
       const { state } = this.props.location;
-      window.location = "/profile";
-      //   window.location = state ? state.from.pathname : "/";
+      
+       window.location = state ? state.from.pathname : "/profile";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

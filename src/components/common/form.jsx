@@ -94,6 +94,7 @@ class Form extends Component {
   }
 
   renderControlledInput(name, label, placeholder, type = "text"){
+    // eslint-disable-next-line
     const { data, errors } = this.state;
 
     return (

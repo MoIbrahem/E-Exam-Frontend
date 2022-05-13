@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Redirect } from "react-router-dom";
+//import {Link, Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as resetpasswordService from "../services/resetpasswordService";
