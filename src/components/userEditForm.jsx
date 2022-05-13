@@ -1,16 +1,17 @@
 import React from "react";
 //import { Link, Redirect } from "react-router-dom";
-import auth from "../services/authService";
+//import auth from "../services/authService";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userEditService from "../services/userEditService";
+import * as userService from "../services/userService";
 
 
 class UserEditForm extends Form {
   state = {
     data: { email: "", first_name: "", last_name: "" },
     errors: {},
-    user: auth.getCurrentUser(),
+    user: {data:{}}
   };
 
   schema = {
@@ -39,13 +40,13 @@ class UserEditForm extends Form {
     }
   };
 
-  componentDidMount() {
-    const user = auth.getCurrentUser();
+  async componentDidMount() {
+    const user = await userService.getUser();
     this.setState({ user });
   }
 
   render() {
-    const { email, first_name, last_name } = this.state.user;
+    const { email, first_name, last_name } = this.state.user.data;
     return (
       <div>
         <h1>User Information</h1>

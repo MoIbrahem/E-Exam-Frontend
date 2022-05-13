@@ -13,7 +13,7 @@ import changePasswordForm from "./components/changePasswordForm";
 import UserEditForm from "./components/userEditForm";
 import ResetpasswordForm from "./components/ResetpasswordForm";
 import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
-import ChangeStudentInformationForm from "./components/changeUserInformationForm";
+import ChangeStudentInformationForm from "./components/ChangeStudentInformationForm";
 import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";

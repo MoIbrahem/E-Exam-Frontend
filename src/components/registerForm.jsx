@@ -8,8 +8,8 @@ class RegisterForm extends Form {
   state = {
     data: { username: "", password: "",email:"", first_name: "", last_name:"", profile_type:"" },
     profiles: [
-                {name:"Student",value:"STD"},
-                {name:"Professor",value:"PRF"}
+                {title:"Student",id:"STD"},
+                {title:"Professor",id:"PRF"}
               ],
     errors: {}
   };

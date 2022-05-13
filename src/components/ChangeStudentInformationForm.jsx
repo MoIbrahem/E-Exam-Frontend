@@ -1,6 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import * as userEditService from "../services/userEditService";
 import {
   getStudent,
   getStudentDep,
@@ -9,24 +10,26 @@ import {
 
 class ChangeStudentInformationForm extends Form {
   state = {
-    data: { phone: "", birthdate: "", level: "", department: "" },
+    data: { phone: "", birth_date: "", level: "", department: "" },
     errors: [],
-    level: { id: "", title:"" },
-    department: [],
+    level: [],
+    department:[],
+    student: {data:{}}
   };
 
   schema = {
     phone: Joi.number().required().label("Phone"),
-    birthdate: Joi.string().required().label("Birthdate"),
+    birth_date: Joi.string().required().label("Birthdate"),
     level: Joi.string().required().label("Level"),
     department: Joi.string().required().label("Department"),
   };
 
   doSubmit = async () => {
     try {
+      const { data } = this.state;
+      await userEditService.editStudent(data);
       const { state } = this.props.location;
-      window.location = "/edit-student-information";
-      //   window.location = state ? state.from.pathname : "/";
+      window.location = state ? state.from.pathname : "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -40,24 +43,27 @@ class ChangeStudentInformationForm extends Form {
   };
 
   async componentDidMount() {
-    const { data: student } = await getStudent();
-    const { data: levels } = await getStudentLevel();
-    const { data: departments } = await getStudentDep();
-    this.setState({ student, levels, departments });
-    console.log(levels);
+    const student = await getStudent();
+    const { data: level } = await getStudentLevel();
+    const { data: department } = await getStudentDep();
+    this.setState({ student, level, department });
+    console.log(level);
+    console.log(student)
   }
 
   render() {
-    const { name: id, value: title } = this.state.level;
-    const { department } = this.state;
+    // const { name: id, value: title } = this.state.level;
+    console.log(this.state.student.data.birth_date);
+    const date = this.state.student.data.birth_date
+
     return (
       <div>
         <h1>Student Information</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderControlledInput("phone", "Phone Number")}
-          {this.renderControlledInput("birthdate", "Birthdate")}
-          {this.renderSelect("level", "Level", [id, title])}
-          {/* {this.renderSelect("department", "Department", department["title"])} */}
+          {this.renderControlledInput("phone", "Phone Number",this.state.student.data.phone)}
+          {this.renderControlledInput("birth_date", "Birthdate",date,"date")}
+          {this.renderSelect("level", "Level", this.state.level)}
+          {this.renderSelect("department", "Department", this.state.department)}
           {this.renderButton("Save")}
         </form>
       </div>
