@@ -1,40 +1,83 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getUser, getStudent } from "../services/userService";
-import UserProfile from "./common/userProfile";
 
-class UserProfileForm extends Component {
+class UserProfile extends Component {
   state = {
     user: {},
-    student: { level: "", department: "" },
+    student:{level:"", department:""},
+
   };
 
   async componentDidMount() {
-    const { data: user } = await getUser();
-    const { data: student } = await getStudent();
-    console.log(student);
-    this.setState({ user, student });
+    const {data : user } = await getUser();
+    const {data : student } = await getStudent();
+    console.log(user, student);
+    console.log(student.department["title"]);
+    this.setState({user , student});
   }
 
   render() {
-    const { username, first_name, last_name, email } = this.state.user;
-    const { phone, birth_date, level, department, score, overall_level_rank } =
-      this.state.student;
-
     return (
-      <UserProfile
-        username={username}
-        first_name={first_name}
-        last_name={last_name}
-        email={email}
-        phone={phone}
-        birth_date={birth_date}
-        level={level}
-        department={department}
-        overall_level_rank={overall_level_rank}
-        score={score}
-      />
+      <div>
+        <h1>Profile</h1>
+        <h4>User Information</h4>
+        <table>
+          <tbody>
+            <tr>
+              <td>Username: {`${this.state.user.username}`}</td>
+            </tr>
+            <tr>
+              <td>Full Name: {`${this.state.user.first_name +" "+ this.state.user.last_name }`}</td>
+            </tr>
+            <tr>
+              <td>Email: {`${this.state.user.email}`}</td>
+            </tr>
+          </tbody>
+        </table>
+          <p className="mt-3">
+            <Link to="/change-password">Change Password</Link>
+          </p>
+          <p className="mt-3">
+            <Link to="/edit-user">Update user information</Link>
+          </p>
+        <h4>Student Information</h4>
+        <table>
+          <tbody>
+            <tr>
+              <td>Phone: {`${this.state.student.phone}`}</td>
+            </tr>
+            <tr>
+              <td>Birth date: {`${this.state.student.birth_date}`}</td>
+            </tr>
+            <tr>
+              <td>Level: {`${this.state.student.level["title"]}`}</td>
+            </tr>
+            <tr>
+              <td>Department: {`${this.state.student.department["title"]}`}</td>
+            </tr>
+            <tr>
+              <td>Score: {`${this.state.student.score}`}</td>
+            </tr>
+            <tr>
+              <td>Overall Rank: {`${this.state.student.overall_level_rank}`}</td>
+              <div style={{ margin: "right" }}>
+                <Link
+                  to="/edit-student-information"
+                  className="btn btn-primary"
+                >
+                  Edit
+                </Link>
+              </div>
+            </tr>
+            
+          </tbody>
+          
+        </table>
+        
+      </div>
     );
   }
 }
 
-export default UserProfileForm;
+export default UserProfile;
