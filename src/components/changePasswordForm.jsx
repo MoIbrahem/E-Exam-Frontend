@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userService from "../services/userService";
-import auth from "../services/authService";
+//import auth from "../services/authService";
 
 class changePsswordForm extends Form {
   state = {
@@ -27,7 +27,7 @@ class changePsswordForm extends Form {
 
   doSubmit = async () => {
     try {
-      const response = await userService.setpassword(this.state.data);
+      await userService.setpassword(this.state.data);
       window.location = "/profile";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
