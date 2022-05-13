@@ -4,7 +4,6 @@ import auth from "../services/authService";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userEditService from "../services/userEditService";
-import { first, last } from "lodash";
 
 class UserEditForm extends Form {
   state = {
