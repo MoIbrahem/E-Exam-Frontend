@@ -26,6 +26,7 @@ class UserEditForm extends Form {
       const response = await userEditService.edit(data);
 
       const { state } = this.props.location;
+      window.location = "/profile";
       //   window.location = state ? state.from.pathname : "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -47,12 +48,12 @@ class UserEditForm extends Form {
     const { email, first_name, last_name } = this.state.user;
     return (
       <div>
-        <h1>Login</h1>
+        <h1>User Information</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderControlledInput("email", "Email", email)}
           {this.renderControlledInput("first_name", "First Name", first_name)}
           {this.renderControlledInput("last_name", "Last Name", last_name)}
-          {this.renderEditButton("Save")}
+          {this.renderButton("Save")}
         </form>
       </div>
     );

@@ -10,6 +10,7 @@ import UserProfile from './components/userProfile';
 import NavBar from "./components/navBar";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import changePasswordForm from "./components/changePasswordForm";
 import UserEditForm from './components/userEditForm';
 import ResetpasswordForm from "./components/ResetpasswordForm";
 import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
@@ -41,6 +42,7 @@ class App extends Component {
             <Route path="/edit-user" component={UserEditForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/reset-password" component={ResetpasswordForm} />
+            <Route path="/change-password" component={changePasswordForm} />
             <Route path="/password/reset/confirm/:uid/:token" component={ResetpasswordconfirmForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
