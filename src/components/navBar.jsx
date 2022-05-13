@@ -19,20 +19,7 @@ const NavBar = ({ user }) => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link to={"/create"} className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/index"} className="nav-link">
-                Records
-              </Link>
-            </li>
-          </ul>
-        </div>
+      
       
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
