@@ -14,10 +14,11 @@ export function edit(user) {
 
 export function editStudent(user) {
   return http.put(studentprofileEndPoint, {
-    phone:user.phone,
-    birth_date:user.birth_date,
-    level:user.level,
-    department:user.department
+    phone: user.phone,
+    birth_date: user.birth_date,
+    level: user.level,
+    department: user.department,
   });
 }
+
 

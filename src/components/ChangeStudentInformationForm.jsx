@@ -24,12 +24,14 @@ class ChangeStudentInformationForm extends Form {
     department: Joi.string().required().label("Department"),
   };
 
+  
+
   doSubmit = async () => {
     try {
       const { data } = this.state;
       await userEditService.editStudent(data);
-      const { state } = this.props.location;
-      window.location = state ? state.from.pathname : "/";
+      
+      // window.location = "/profile";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -47,13 +49,9 @@ class ChangeStudentInformationForm extends Form {
     const { data: level } = await getStudentLevel();
     const { data: department } = await getStudentDep();
     this.setState({ student, level, department });
-    console.log(level);
-    console.log(student)
   }
 
   render() {
-    // const { name: id, value: title } = this.state.level;
-    console.log(this.state.student.data.birth_date);
     const date = this.state.student.data.birth_date
 
     return (

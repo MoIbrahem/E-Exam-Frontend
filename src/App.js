@@ -13,14 +13,14 @@ import changePasswordForm from "./components/changePasswordForm";
 import UserEditForm from "./components/userEditForm";
 import ResetpasswordForm from "./components/ResetpasswordForm";
 import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
+import UserProfileForm from "./components/userProfileForm";
+import StudentSubjectForm from "./components/studentSubjectForm";
 import ChangeStudentInformationForm from "./components/ChangeStudentInformationForm";
 import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import UserProfileForm from './components/userProfileForm';
-
 
 class App extends Component {
   state = {};
@@ -38,13 +38,14 @@ class App extends Component {
         <NavBar user={user} />
         <main className="container">
           <Switch>
-            <Route path="/register" component={RegisterForm} />
-            <Route path="/profile" component={UserProfileForm} />
-            <Route path="/edit-user" component={UserEditForm} />
+            <Route exact path="/register" component={RegisterForm} />
+            <Route exact path="/profile" component={UserProfileForm} />
+            <Route exact path="/edit-user" component={UserEditForm} />
             <Route
               path="/edit-student-information"
               component={ChangeStudentInformationForm}
             />
+            <Route path="/profile/exam" component={StudentSubjectForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/reset-password" component={ResetpasswordForm} />
             <Route path="/change-password" component={changePasswordForm} />
