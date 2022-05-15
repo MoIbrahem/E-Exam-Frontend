@@ -15,6 +15,7 @@ class StudentSubjectForm extends Component {
   }
   render() {
     const result = this.state.exams.results;
+    console.log(result);
 
     if (this.state.loading) {
       return <div>loading...</div>;
