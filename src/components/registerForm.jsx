@@ -1,10 +1,9 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import * as userService from "../services/userService";
 import auth from "../services/authService";
 import * as usercreateService from "../services/usercreateService";
-import { Redirect } from "react-router-dom";
+
 
 
 class RegisterForm extends Form {
@@ -46,7 +45,7 @@ class RegisterForm extends Form {
       if (response){
         const user = this.state.data.username;
         const pass = this.state.data.password;
-        const trys = await auth.login(user, pass);
+        await auth.login(user, pass);
         
         window.location = "/edit-student-information";
 

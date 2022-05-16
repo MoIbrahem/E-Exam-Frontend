@@ -9,7 +9,7 @@ class StudentSubjectForm extends Component {
     result: [],
     id: "",
     loading: true,
-    erros:{}
+    errors:{}
   };
   async componentDidMount() {
     try {
@@ -19,6 +19,8 @@ class StudentSubjectForm extends Component {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         this.setState({ errors });
+        console.log(ex.response.data);
+        this.render(ex.response.data);
       }
       else if(ex.response.status === 401){
         auth.refreshJwt();
@@ -35,6 +37,7 @@ class StudentSubjectForm extends Component {
     if (this.state.loading) {
       return <div>loading...</div>;
     }
+    
     if (result.length === 0) {
       return <div>You have no exams</div>;
     }
