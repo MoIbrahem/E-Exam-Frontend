@@ -5,7 +5,7 @@ const apiEndpoint = apiUrl + "/exam/exams/";
 const levelEndpoint = apiUrl + "/exam/levels/";
 
 function ExamUrl(id) {
-  return `${apiEndpoint}/${id}`;
+  return `${apiEndpoint}/${id}/`;
 }
 
 export function getExamStatus() {

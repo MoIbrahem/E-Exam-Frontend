@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import moment from "moment";
+import { toast } from "react-toastify";
 import { getExamStatus } from "../services/examService";
 import { Link } from "react-router-dom";
 import auth from "../services/authService";
@@ -6,10 +8,8 @@ import auth from "../services/authService";
 class StudentSubjectForm extends Component {
   state = {
     exams: { count: "", next: "", previous: "", results: [] },
-    result: [],
-    id: "",
     loading: true,
-    errors:{}
+    errors: {},
   };
   async componentDidMount() {
     try {
@@ -19,25 +19,22 @@ class StudentSubjectForm extends Component {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         this.setState({ errors });
-        console.log(ex.response.data);
-        this.render(ex.response.data);
-      }
-      else if(ex.response.status === 401){
+        toast.info(ex.response.data[0]);
+        // console.log(ex.response.data[0]);
+        // this.render(ex.response.data);
+      } else if (ex.response.status === 401) {
         auth.refreshJwt();
       }
-      
     }
-    
   }
   render() {
     const result = this.state.exams.results;
     console.log(result);
-    
 
     if (this.state.loading) {
       return <div>loading...</div>;
     }
-    
+
     if (result.length === 0) {
       return <div>You have no exams</div>;
     }
@@ -46,9 +43,10 @@ class StudentSubjectForm extends Component {
       return (
         <div>
           {result.map((exam) => (
-            <div key= {exam.id}>
+            <div key={exam.id}>
               <Link to="/profile" key={exam.id}>
-                {exam.title} {Date(exam.starts_at)}
+                {exam.title} {moment(Date(exam.starts_at)).format("llll")}{" "}
+                {exam.subject["title"]}
               </Link>
             </div>
           ))}
