@@ -2,7 +2,10 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userService from "../services/userService";
-//import auth from "../services/authService";
+import auth from "../services/authService";
+import * as usercreateService from "../services/usercreateService";
+import { Redirect } from "react-router-dom";
+
 
 class RegisterForm extends Form {
   state = {
@@ -39,8 +42,17 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
-      await userService.register(this.state.data);
-      window.location = "/";
+      const response = await usercreateService.register(this.state.data);
+      if (response){
+        const user = this.state.data.username;
+        const pass = this.state.data.password;
+        const trys = await auth.login(user, pass);
+        
+        window.location = "/edit-student-information";
+
+        
+      }
+      
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

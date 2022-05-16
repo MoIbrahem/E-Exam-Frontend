@@ -4,6 +4,7 @@ import { apiUrl } from "../config.json";
 
 
 const apiEndpoint = apiUrl + "/auth/jwt/create/";
+const refreshEndpoint = apiUrl + "/auth/jwt/refresh/";
 const tokenKey = "token";
 
 export async function login(username, password) {
@@ -22,11 +23,17 @@ export function logout() {
 }
 
 export async function refreshJwt() {
+  try {
+  localStorage.removeItem(tokenKey);
   const refToken = localStorage.getItem("refresh");
-  const { data: jwt } = await http.post(apiUrl + "/auth/jwt/refresh/", {
-    refresh: refToken,
-  });
-  localStorage.setItem(tokenKey, jwt);
+  const { data: jwt } = await http.post(refreshEndpoint, {refresh: refToken});
+  localStorage.setItem(tokenKey, jwt.access);
+  window.location = window.location.href
+  } catch (error) {
+  localStorage.removeItem(tokenKey);
+  localStorage.removeItem("refresh");
+  window.location = "/login";   
+  }
 }
 
 export function getCurrentUser() {

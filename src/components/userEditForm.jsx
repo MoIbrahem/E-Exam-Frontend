@@ -1,6 +1,6 @@
 import React from "react";
 //import { Link, Redirect } from "react-router-dom";
-//import auth from "../services/authService";
+import auth from "../services/authService";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userEditService from "../services/userEditService";
@@ -41,8 +41,14 @@ class UserEditForm extends Form {
   };
 
   async componentDidMount() {
-    const user = await userService.getUser();
-    this.setState({ user });
+    try {
+      const user = await userService.getUser();
+      this.setState({ user });
+    } catch (ex) {
+      if(ex.response.status === 401){
+        auth.refreshJwt();
+      }
+    }
   }
 
   render() {

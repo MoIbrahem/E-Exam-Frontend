@@ -8,8 +8,9 @@ const studentprofileEndPoint = apiUrl + "/exam/students/me";
 const levelsEndPoint = apiUrl + "/exam/levels/";
 const depEndPoint = apiUrl + "/exam/departments";
 
+
 export function register(user) {
-  return http.post(apiEndpoint, {
+  return http.post(apiEndpoint,{
     username: user.username,
     password: user.password,
     email: user.email,

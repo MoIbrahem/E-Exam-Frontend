@@ -3,8 +3,7 @@ import logger from "./logService";
 import { getJwt } from "./authService";
 import { toast } from "react-toastify";
 
-// axios.defaults.headers.common["Authorization"] =
-//   "JWT " + localStorage.getItem("token");
+
 axios.defaults.headers.common["Authorization"] =
   "JWT " + getJwt();
 

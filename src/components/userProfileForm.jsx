@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getUser, getStudent } from "../services/userService";
+import auth from "../services/authService";
 
 class UserProfile extends Component {
   state = {
@@ -10,11 +11,18 @@ class UserProfile extends Component {
   };
 
   async componentDidMount() {
-    const {data : user } = await getUser();
-    const {data : student } = await getStudent();
-    console.log(user, student);
-    console.log(student.department["title"]);
-    this.setState({user , student});
+    try {
+      const {data : user } = await getUser();
+      const {data : student } = await getStudent();
+      console.log(user, student);
+      console.log(student.department["title"]);
+      this.setState({user , student});
+    } catch (ex) {
+        if(ex.response.status === 401){
+          auth.refreshJwt();
+        }
+    }
+    
   }
 
   render() {

@@ -26,8 +26,13 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
-    const user = auth.getCurrentUser();
-    this.setState({ user });
+    try {
+      const user = auth.getCurrentUser();
+      this.setState({ user });
+    } catch (error) {
+      // auth.refreshJwt();
+    }
+    
   }
 
   render() {

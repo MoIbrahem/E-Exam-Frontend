@@ -2,6 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import * as userEditService from "../services/userEditService";
+import auth from "../services/authService";
 import {
   getStudent,
   getStudentDep,
@@ -30,8 +31,7 @@ class ChangeStudentInformationForm extends Form {
     try {
       const { data } = this.state;
       await userEditService.editStudent(data);
-      
-      // window.location = "/profile";
+      window.location = "/profile";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -45,10 +45,18 @@ class ChangeStudentInformationForm extends Form {
   };
 
   async componentDidMount() {
-    const student = await getStudent();
-    const { data: level } = await getStudentLevel();
-    const { data: department } = await getStudentDep();
-    this.setState({ student, level, department });
+    try {
+      const student = await getStudent();
+      const { data: level } = await getStudentLevel();
+      const { data: department } = await getStudentDep();
+      this.setState({ student, level, department });
+      
+    } catch (ex) {
+      if(ex.response.status === 401){
+        auth.refreshJwt();
+      }
+    }
+    
   }
 
   render() {

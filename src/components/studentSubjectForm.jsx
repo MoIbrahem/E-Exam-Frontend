@@ -1,21 +1,36 @@
 import React, { Component } from "react";
 import { getExamStatus } from "../services/examService";
 import { Link } from "react-router-dom";
+import auth from "../services/authService";
 
 class StudentSubjectForm extends Component {
   state = {
-    exams: { count: "", next: "", previous: "", results: "" },
+    exams: { count: "", next: "", previous: "", results: [] },
     result: [],
     id: "",
     loading: true,
+    erros:{}
   };
   async componentDidMount() {
-    const { data: exams } = await getExamStatus();
-    this.setState({ exams, loading: false });
+    try {
+      const { data: exams } = await getExamStatus();
+      this.setState({ exams, loading: false });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        this.setState({ errors });
+      }
+      else if(ex.response.status === 401){
+        auth.refreshJwt();
+      }
+      
+    }
+    
   }
   render() {
     const result = this.state.exams.results;
     console.log(result);
+    
 
     if (this.state.loading) {
       return <div>loading...</div>;
@@ -30,7 +45,7 @@ class StudentSubjectForm extends Component {
           {result.map((exam) => (
             <div key= {exam.id}>
               <Link to="/profile" key={exam.id}>
-                {exam.title} {exam.starts_at}
+                {exam.title} {Date(exam.starts_at)}
               </Link>
             </div>
           ))}
