@@ -18,7 +18,7 @@ class UserProfile extends Component {
       console.log(student.department["title"]);
       this.setState({user , student});
     } catch (ex) {
-        if(ex.response.status === 401){
+        if(ex.response && ex.response.status === 401){
           auth.refreshJwt();
         }
     }

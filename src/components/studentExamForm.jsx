@@ -5,7 +5,7 @@ import { getExamStatus } from "../services/examService";
 import { Link } from "react-router-dom";
 import auth from "../services/authService";
 
-class StudentSubjectForm extends Component {
+class StudentExamForm extends Component {
   state = {
     exams: { count: "", next: "", previous: "", results: [] },
     loading: true,
@@ -20,9 +20,7 @@ class StudentSubjectForm extends Component {
         const errors = { ...this.state.errors };
         this.setState({ errors });
         toast.info(ex.response.data[0]);
-        // console.log(ex.response.data[0]);
-        // this.render(ex.response.data);
-      } else if (ex.response.status === 401) {
+      } else if (ex.response && ex.response.status === 401) {
         auth.refreshJwt();
       }
     }
@@ -44,8 +42,8 @@ class StudentSubjectForm extends Component {
         <div>
           {result.map((exam) => (
             <div key={exam.id}>
-              <Link to="/profile" key={exam.id}>
-                {exam.title} {moment(Date(exam.starts_at)).format("llll")}{" "}
+              <Link to={`/exams/exam/${exam.id}`} key={exam.id}>
+                {exam.title} {moment(exam.starts_at).format("llll")}{" "}
                 {exam.subject["title"]}
               </Link>
             </div>
@@ -56,4 +54,4 @@ class StudentSubjectForm extends Component {
   }
 }
 
-export default StudentSubjectForm;
+export default StudentExamForm;

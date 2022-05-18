@@ -14,7 +14,9 @@ import UserEditForm from "./components/userEditForm";
 import ResetpasswordForm from "./components/ResetpasswordForm";
 import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
 import UserProfileForm from "./components/userProfileForm";
-import StudentSubjectForm from "./components/studentSubjectForm";
+import StudentExamForm from "./components/studentExamForm";
+import SubjectExamForm from "./components/subjectExamForm";
+import ExamQuestionForm from './components/examQuestionForm';
 import ChangeStudentInformationForm from "./components/ChangeStudentInformationForm";
 import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
@@ -32,7 +34,6 @@ class App extends Component {
     } catch (error) {
       // auth.refreshJwt();
     }
-    
   }
 
   render() {
@@ -50,7 +51,7 @@ class App extends Component {
               path="/edit-student-information"
               component={ChangeStudentInformationForm}
             />
-            <Route path="/exams" component={StudentSubjectForm} />
+            <Route exact path="/exams" component={StudentExamForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/reset-password" component={ResetpasswordForm} />
             <Route path="/change-password" component={changePasswordForm} />
@@ -58,6 +59,8 @@ class App extends Component {
               path="/password/reset/confirm/:uid/:token"
               component={ResetpasswordconfirmForm}
             />
+            <Route exact path="/exams/exam/:id" component={SubjectExamForm} />
+            <Route path="/exams/exam/:id/examquestions" component={ExamQuestionForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route

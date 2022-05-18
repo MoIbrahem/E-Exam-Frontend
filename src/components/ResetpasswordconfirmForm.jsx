@@ -2,7 +2,7 @@ import React from "react";
 //import {Link, Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import * as respassconfirmService from "../services/repassconfirmService";
+import * as rePassConfirmService from "../services/repassconfirmService";
 
 class ResetpasswordconfirmForm extends Form {
   state = {
@@ -25,7 +25,7 @@ class ResetpasswordconfirmForm extends Form {
     try {
         const uid = this.props.match.params.uid;
         const token = this.props.match.params.token;
-      await respassconfirmService.reset_password_confirm(uid, token, this.state.data);
+      await rePassConfirmService.reset_password_confirm(uid, token, this.state.data);
 
       // const { state } = this.props.location;
       // window.location = state ? state.from.pathname : "/";
