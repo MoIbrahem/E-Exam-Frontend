@@ -44,10 +44,8 @@ class subjectExamForm extends Form {
   doSubmit = async () => {
     try {
       const id = this.props.match.params.id;
-      const response = await getExamQuestion(id);
       const { data: exam } = await getExam(id);
 
-      console.log(response);
       const { state } = this.props.location;
 
       window.location = state

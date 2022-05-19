@@ -14,6 +14,7 @@ class StudentExamForm extends Component {
   async componentDidMount() {
     try {
       const { data: exams } = await getExamStatus();
+      console.log(exams);
       this.setState({ exams, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
