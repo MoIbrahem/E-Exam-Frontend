@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { getExam } from "../services/examService";
 import auth from "../services/authService";
 import Form from "./common/form";
-import { getExamQuestion } from "./../services/examService";
 
 class subjectExamForm extends Form {
   state = {
@@ -29,7 +28,7 @@ class subjectExamForm extends Form {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         this.setState({ errors });
-        toast.info(ex.response.data);
+        toast.info(ex.response.data[0]);
       } else if (ex.response && ex.response.status === 401) {
         auth.refreshJwt();
       }
