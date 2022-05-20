@@ -5,6 +5,8 @@ import auth from "../services/authService";
 import Form from "./common/form";
 import { getExamQuestion } from "./../services/examService";
 import { number } from "prop-types";
+import { indexOf } from "lodash";
+import { array } from "prop-types";
 
 class ExamQuestionForm extends Form {
   state = {
@@ -25,7 +27,7 @@ class ExamQuestionForm extends Form {
     },
     submit: {
       exam__id: this.props.match.params.id,
-      student_answer: [{ questions: number, answers: [] }],
+      student_answer: []
     },
     loading: true,
     errors: {},
@@ -41,6 +43,7 @@ class ExamQuestionForm extends Form {
       
       console.log(exam.subject);
       console.log(response);
+      console.log(this.state.submit);
       this.setState({ response, exam, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -80,20 +83,33 @@ class ExamQuestionForm extends Form {
   // };
 
   handleChoice = (e) => {
-    const { value, id } = e.target;
+    var { value} = e.target;
+    var qid = e.target.getAttribute('qid');
+    var qindex = e.target.getAttribute('qindex'); 
     // answers = value
-    this.state.submit.student_answer[0].answers = [value];
-    this.state.submit.student_answer[0].questions = id;
-    this.setState({
-      value,
-    });
-    console.log(this.state.submit.student_answer[0].answers);
+
+    // const newArr = this.state.temp.student_answer.map(obj => {
+    //   if (obj.questions == qid) {
+    //     return {...obj, answers: [value]};
+    //   }
+    
+    //   return obj;
+    // });
+    // console.log(newArr)
+    // this.state.submit.student_answer === newArr;
+    this.state.submit.student_answer[qindex].answers = [value];
+    // this.state.submit.student_answer[qindex].questions = qid;
+    console.log(qid);
+    console.log(qindex);
+    // console.log(this.state.submit.student_answer[qindex].answers);
     console.log(this.state.submit);
   };
 
   render() {
     const { response } = this.state;
     let index;
+    let ctype;
+    
     if (this.state.loading) {
       return <div>loading...</div>;
     }
@@ -102,19 +118,24 @@ class ExamQuestionForm extends Form {
       <div>
         <div>
           {response.map((examQuestion) => (
+            
             index = response.findIndex(x => x.title ===examQuestion.title),
-            console.log(index),
+            console.log(response.indexOf(examQuestion)),
+            this.state.submit.student_answer.push({questions: examQuestion.id, answers: []}),
             <div key={examQuestion.id}>
               {examQuestion.title}
+              
               <ul>
                 {examQuestion.answer.map((answers) => (
                   <ul key={answers.id}>
                     <input
-                      type="radio"
+                      type= "radio"
                       className="radio"
                       id={answers.id}
                       value={answers.id}
                       name={examQuestion.title}
+                      qindex={response.indexOf(examQuestion)}
+                      qid ={examQuestion.id}
                       onChange={this.handleChoice}
                       // onClick={this.checkOnlyOne(this.value)}
                     />
