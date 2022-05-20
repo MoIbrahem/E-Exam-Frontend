@@ -81,13 +81,16 @@ class ExamQuestionForm extends Form {
   // };
 
   handleChoice = (e) => {
+    var qtype = e.target.type;
+
+
     var { value} = e.target;
     var qid = e.target.getAttribute('qid');
-    var qindex = e.target.getAttribute('qindex'); 
-
+    var qindex = e.target.getAttribute('qindex');
     this.state.submit.student_answer[qindex].answers = [value];
     console.log(qid);
     console.log(qindex);
+    console.log(qtype);
     
     console.log(this.state.submit);
   };
@@ -112,8 +115,8 @@ class ExamQuestionForm extends Form {
                 {examQuestion.answer.map((answers) => (
                   <ul key={answers.id}>
                     <input
-                      type= "radio"
-                      className="radio"
+                      type= {examQuestion.type["inputType"]}
+                      className={examQuestion.type["inputType"]}
                       id={answers.id}
                       value={answers.id}
                       name={examQuestion.title}
