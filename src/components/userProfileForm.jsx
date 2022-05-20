@@ -22,7 +22,6 @@ class UserProfile extends Component {
           auth.refreshJwt();
         }
     }
-    
   }
 
   render() {
@@ -85,6 +84,14 @@ class UserProfile extends Component {
                   className="btn btn-primary"
                 >
                   Update student information
+                </Link>
+        </p>
+        <p className="mt-3">
+                <Link
+                  to="/profile/results"
+                  className="btn btn-primary"
+                >
+                  Show Exam Result
                 </Link>
         </p>
       </div>
