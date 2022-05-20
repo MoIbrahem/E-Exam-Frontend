@@ -4,6 +4,7 @@ import { getExam } from "../services/examService";
 import auth from "../services/authService";
 import Form from "./common/form";
 import { getExamQuestion } from "./../services/examService";
+import { number } from "prop-types";
 
 class ExamQuestionForm extends Form {
   state = {
@@ -15,11 +16,16 @@ class ExamQuestionForm extends Form {
       subject: { title: "", hours: "", id: "" },
     },
     response: {
+      index: "",
       id: "",
       title: "",
       type: "",
       images: [],
       answer: [{ id: "", title: "" }],
+    },
+    submit: {
+      exam__id: this.props.match.params.id,
+      student_answer: [{ questions: number, answers: [] }],
     },
     loading: true,
     errors: {},
@@ -31,6 +37,8 @@ class ExamQuestionForm extends Form {
       console.log(id);
       const { data: exam } = await getExam(id);
       const { data: response } = await getExamQuestion(id);
+      
+      
       console.log(exam.subject);
       console.log(response);
       this.setState({ response, exam, loading: false });
@@ -71,12 +79,21 @@ class ExamQuestionForm extends Form {
   //   }
   // };
 
-  createKey = (examQuestion, answer) => {
-    return examQuestion.id + answer.title;
+  handleChoice = (e) => {
+    const { value, id } = e.target;
+    // answers = value
+    this.state.submit.student_answer[0].answers = [value];
+    this.state.submit.student_answer[0].questions = id;
+    this.setState({
+      value,
+    });
+    console.log(this.state.submit.student_answer[0].answers);
+    console.log(this.state.submit);
   };
 
   render() {
     const { response } = this.state;
+    let index;
     if (this.state.loading) {
       return <div>loading...</div>;
     }
@@ -85,15 +102,24 @@ class ExamQuestionForm extends Form {
       <div>
         <div>
           {response.map((examQuestion) => (
+            index = response.findIndex(x => x.title ===examQuestion.title),
+            console.log(index),
             <div key={examQuestion.id}>
               {examQuestion.title}
               <ul>
                 {examQuestion.answer.map((answers) => (
-                  <div key={answers.id}>
-                    {/* <input type="checkbox" id={answers.id} key={answers.id}>{answers.title}</input> */}
-                      <input type="checkbox" id={answers.id} value={answers.id} />
-                      {answers.title}
-                  </div>
+                  <ul key={answers.id}>
+                    <input
+                      type="radio"
+                      className="radio"
+                      id={answers.id}
+                      value={answers.id}
+                      name={examQuestion.title}
+                      onChange={this.handleChoice}
+                      // onClick={this.checkOnlyOne(this.value)}
+                    />
+                    {answers.title}
+                  </ul>
                 ))}
               </ul>
             </div>

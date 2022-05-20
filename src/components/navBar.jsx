@@ -23,8 +23,8 @@ const NavBar = ({ user }) => {
       
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/movies">
-            Movies
+          <NavLink className="nav-item nav-link" to="/exams">
+            My Exams
           </NavLink>
           <NavLink className="nav-item nav-link" to="/customers">
             Customers
