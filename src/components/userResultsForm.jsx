@@ -4,7 +4,7 @@ import auth from "../services/authService";
 
 class UserResultForm extends Component {
   state = {
-    result: { count: "", next: "", previous: "", results: [] }, 
+    result: [], 
     student: {},
     loading: true,
     errors: {},
@@ -15,7 +15,7 @@ class UserResultForm extends Component {
       const { data: result } = await getUserResult();
       const { data: student } = await getUser();
 
-      console.log(result.results);
+      console.log(result);
       this.setState({ result , student});
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
@@ -29,7 +29,7 @@ class UserResultForm extends Component {
       <div>
         <h1>Results</h1>
         <h4>{this.state.student.first_name} {this.state.student.last_name}</h4>
-        {this.state.result.results.map((studentResults) => (
+        {this.state.result.map((studentResults) => (
           <table key={studentResults.exam.id}>
             <tbody>
               <tr>

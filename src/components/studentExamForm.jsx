@@ -7,7 +7,7 @@ import auth from "../services/authService";
 
 class StudentExamForm extends Component {
   state = {
-    exams: { count: "", next: "", previous: "", results: [] },
+    exams: { },
     loading: true,
     errors: {},
   };
@@ -27,7 +27,7 @@ class StudentExamForm extends Component {
     }
   }
   render() {
-    const result = this.state.exams.results;
+    const result = this.state.exams;
     console.log(result);
 
     if (this.state.loading) {
