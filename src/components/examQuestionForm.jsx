@@ -104,9 +104,6 @@ class ExamQuestionForm extends Form {
       <div>
         <div>
           {response.map((examQuestion) => (
-            
-            
-            console.log(response.indexOf(examQuestion)),
             this.state.submit.student_answer.push({questions: examQuestion.id, answers: []}),
             <div key={examQuestion.id}>
               {examQuestion.title}
