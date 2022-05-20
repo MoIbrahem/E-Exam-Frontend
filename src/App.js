@@ -16,6 +16,7 @@ import ResetpasswordconfirmForm from "./components/ResetpasswordconfirmForm";
 import UserProfileForm from "./components/userProfileForm";
 import StudentExamForm from "./components/studentExamForm";
 import SubjectExamForm from "./components/subjectExamForm";
+import UserResultForm from "./components/userResultsForm";
 import ExamQuestionForm from './components/examQuestionForm';
 import ChangeStudentInformationForm from "./components/ChangeStudentInformationForm";
 import Logout from "./components/logout";
@@ -44,9 +45,9 @@ class App extends Component {
         <NavBar user={user} />
         <main className="container">
           <Switch>
-            <Route exact path="/register" component={RegisterForm} />
+            <Route path="/register" component={RegisterForm} />
             <Route exact path="/profile" component={UserProfileForm} />
-            <Route exact path="/edit-user" component={UserEditForm} />
+            <Route path="/edit-user" component={UserEditForm} />
             <Route
               path="/edit-student-information"
               component={ChangeStudentInformationForm}
@@ -62,6 +63,7 @@ class App extends Component {
             <Route exact path="/exams/exam/:id" component={SubjectExamForm} />
             <Route path="/exams/exam/:id/examquestions" component={ExamQuestionForm} />
             <Route path="/logout" component={Logout} />
+            <Route path="/profile/results" component={UserResultForm} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route
               path="/movies"
