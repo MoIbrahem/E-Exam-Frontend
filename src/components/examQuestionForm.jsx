@@ -1,6 +1,6 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { getExam } from "../services/examService";
+import { getExam, answerSubmit } from "../services/examService";
 import auth from "../services/authService";
 import Form from "./common/form";
 import { getExamQuestion } from "./../services/examService";
@@ -54,44 +54,63 @@ class ExamQuestionForm extends Form {
     }
   }
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.doSubmit();
-  // };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.doSubmit();
+  };
 
-  // doSubmit = async () => {
-  //   try {
-  //     const id = this.props.match.params.id;
-  //     const response = await getExamQuestion(id);
-  //     const { data: exam } = await getExam(id);
+  doSubmit = async () => {
+    try {
+      const response = await answerSubmit(this.state.submit);
+      console.log(response);
+      
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        alert(ex.response.data);
+        this.setState({ errors });
+      }
+    }
+  };
 
-  //     console.log(response);
-  //     // const { state } = this.props.location;
-
-  //     // window.location = state
-  //     //   ? state.from.pathname
-  //     //   : `/exams/exam/${exam.id}/examquestions`;
-  //   } catch (ex) {
-  //     if (ex.response && ex.response.status === 400) {
-  //       const errors = { ...this.state.errors };
-  //       this.setState({ errors });
-  //       toast.info(ex.response.data);
-  //     }
-  //   }
-  // };
 
   handleChoice = (e) => {
     var qtype = e.target.type;
 
-
-    var { value} = e.target;
-    var qid = e.target.getAttribute('qid');
+    // var qid = e.target.getAttribute('qid');
     var qindex = e.target.getAttribute('qindex');
-    this.state.submit.student_answer[qindex].answers = [value];
-    console.log(qid);
-    console.log(qindex);
-    console.log(qtype);
+    if(qtype === "radio"){
+      var { value} = e.target;
+      this.state.submit.student_answer[qindex].answers = [value];
+      // console.log(qid);
+      // console.log(qindex);
+      // console.log(qtype);
+  
+    }else if(qtype ==="checkbox"){
+      var listArray=[];
+      var checkBoxes = document.getElementsByName(e.target.name);
+      console.log(checkBoxes);
+      for( var checkBox of checkBoxes) {
+        console.log("entered");
+        
+          if(checkBox.checked === true){
+            console.log("checked");
+            listArray.push(checkBox.value);
+          }else{
+            listArray = listArray.filter(e=> e !== this.value);
+            
+          }
+        
+      }
+      console.log(listArray);
+      this.state.submit.student_answer[qindex].answers =listArray;
+      
+  
+    } 
+
     
+    
+
     console.log(this.state.submit);
   };
 
@@ -102,9 +121,9 @@ class ExamQuestionForm extends Form {
     if (this.state.loading) {
       return <div>loading...</div>;
     }
-
+    
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <div>
           {response.map((examQuestion) => (
             // eslint-disable-next-line
@@ -120,7 +139,7 @@ class ExamQuestionForm extends Form {
                       className={examQuestion.type["inputType"]}
                       id={answers.id}
                       value={answers.id}
-                      name={examQuestion.title}
+                      name={response.indexOf(examQuestion)}
                       qindex={response.indexOf(examQuestion)}
                       qid ={examQuestion.id}
                       onChange={this.handleChoice}
@@ -133,11 +152,12 @@ class ExamQuestionForm extends Form {
             </div>
           ))}
         </div>
+        {this.renderButton("submit")}
 
         {/* <form onSubmit={this.handleSubmit}>
           {this.renderButton("Take Exam")}
         </form> */}
-      </div>
+      </form>
     );
   }
 }
