@@ -107,8 +107,9 @@ class ExamQuestionForm extends Form {
       <div>
         <div>
           {response.map((examQuestion) => (
+            // eslint-disable-next-line
             this.state.submit.student_answer.push({questions: examQuestion.id, answers: []}),
-            <div key={examQuestion.id}>
+            <div key={response.indexOf(examQuestion)}>
               {examQuestion.title}
               
               <ul>
