@@ -4,9 +4,7 @@ import { getExam } from "../services/examService";
 import auth from "../services/authService";
 import Form from "./common/form";
 import { getExamQuestion } from "./../services/examService";
-import { number } from "prop-types";
-import { indexOf } from "lodash";
-import { array } from "prop-types";
+
 
 class ExamQuestionForm extends Form {
   state = {
@@ -86,29 +84,17 @@ class ExamQuestionForm extends Form {
     var { value} = e.target;
     var qid = e.target.getAttribute('qid');
     var qindex = e.target.getAttribute('qindex'); 
-    // answers = value
 
-    // const newArr = this.state.temp.student_answer.map(obj => {
-    //   if (obj.questions == qid) {
-    //     return {...obj, answers: [value]};
-    //   }
-    
-    //   return obj;
-    // });
-    // console.log(newArr)
-    // this.state.submit.student_answer === newArr;
     this.state.submit.student_answer[qindex].answers = [value];
-    // this.state.submit.student_answer[qindex].questions = qid;
     console.log(qid);
     console.log(qindex);
-    // console.log(this.state.submit.student_answer[qindex].answers);
+    
     console.log(this.state.submit);
   };
 
   render() {
     const { response } = this.state;
-    let index;
-    let ctype;
+
     
     if (this.state.loading) {
       return <div>loading...</div>;
@@ -119,7 +105,7 @@ class ExamQuestionForm extends Form {
         <div>
           {response.map((examQuestion) => (
             
-            index = response.findIndex(x => x.title ===examQuestion.title),
+            
             console.log(response.indexOf(examQuestion)),
             this.state.submit.student_answer.push({questions: examQuestion.id, answers: []}),
             <div key={examQuestion.id}>
