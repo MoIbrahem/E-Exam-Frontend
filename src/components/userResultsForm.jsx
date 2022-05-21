@@ -28,18 +28,18 @@ class UserResultForm extends Component {
     return (
       <div>
         <h1>Results</h1>
-        <h4>{this.state.student.first_name} {this.state.student.last_name}</h4>
+        <h2>{this.state.student.first_name} {this.state.student.last_name}</h2>
         {this.state.result.map((studentResults) => (
-          <table key={studentResults.exam.id}>
-            <tbody>
+          <table className="card" key={studentResults.exam.id}>
+            <tbody className="card-body">
               <tr>
                 <th>
-                {studentResults.exam["title"]}
+                <h3>{studentResults.exam["title"]}</h3>
                 </th>
               </tr>
               <tr>
                 <td>
-                Subject: {studentResults.exam.subject["title"]}
+                <h5><b>Subject:</b> {studentResults.exam.subject["title"]}</h5>
                 </td>
               </tr>
               <tr>

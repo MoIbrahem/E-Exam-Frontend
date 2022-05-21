@@ -66,16 +66,37 @@ class subjectExamForm extends Form {
     }
 
     return (
-      <div>
-        <div>{title}</div>
-        <div>{moment(starts_at).format("llll")}</div>{" "}
-        <div>{moment(ends_at).format("llll")}</div>
-        <div>{subject["title"]}</div>
-        <div>{subject["hours"]}</div>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderButton("Take Exam")}
+      <form onSubmit={this.handleSubmit}>
+      <table className="Table-exam">
+          <tbody>
+          <tr>
+              <td>Title: {subject["title"]}</td>
+            </tr>
+            <tr>
+              <td>starts_at: {moment(starts_at).format("llll")}</td>
+            </tr>
+            <tr>
+              <td>ends_at: {moment(ends_at).format("llll")}</td>
+            </tr>
+            <tr>
+              <td>Hours:{subject["hours"]}</td>
+            </tr>
+            <tr>
+              <td>{this.renderButton("Take Exam")}</td>
+            </tr>
+          </tbody>
+        </table>
         </form>
-      </div>
+      // <div className="take-exam">
+      //   <div>{title}</div>
+      //   <div>{moment(starts_at).format("llll")}</div>{" "}
+      //   <div>{moment(ends_at).format("llll")}</div>
+      //   <div>{subject["title"]}</div>
+      //   <div>{subject["hours"]}</div>
+      //   <form onSubmit={this.handleSubmit}>
+      //     {this.renderButton("Take Exam")}
+      //   </form>
+      // </div>
     );
   }
 }
