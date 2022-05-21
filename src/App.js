@@ -24,6 +24,7 @@ import Logout from "./components/logout";
 import needToLogout from "./components/needToLogout";
 import emailSent from "./components/emailSent";
 import passwordChanged from "./components/passwordChanged";
+import ExamResult from "./components/examResult";
 import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
@@ -67,6 +68,7 @@ class App extends Component {
             <Route exact path="/exams/exam/:id" component={SubjectExamForm} />
             <Route path="/exams/exam/:id/examquestions" component={ExamQuestionForm} />
             <Route path="/logout" component={Logout} />
+            <Route path="/exam-result" component={ExamResult} />
             <Route path="/profile/results" component={UserResultForm} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route
