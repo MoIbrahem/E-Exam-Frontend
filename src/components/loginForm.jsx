@@ -23,7 +23,7 @@ class LoginForm extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const response = await auth.login(data.username, data.password);
+      await auth.login(data.username, data.password);
       
 
         const user = await getCurrentUser();
