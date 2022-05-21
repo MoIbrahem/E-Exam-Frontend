@@ -7,7 +7,8 @@ const profileEndPoint = apiUrl + "/auth/users/me";
 const studentprofileEndPoint = apiUrl + "/exam/students/me";
 const levelsEndPoint = apiUrl + "/exam/levels/";
 const depEndPoint = apiUrl + "/exam/departments";
-const resultEndpoint = apiUrl + "/exam/results/"
+const resultEndpoint = apiUrl + "/exam/results/";
+const testadminEndPoint = apiUrl + "/auth/users/";
 
 
 export function register(user) {
@@ -31,6 +32,10 @@ export function setpassword(user) {
 
 export function getUser() {
   return http.get(profileEndPoint);
+}
+
+export function testadmin() {
+  return http.get(testadminEndPoint);
 }
 
 export function getUserResult() {

@@ -27,8 +27,7 @@ class ResetpasswordconfirmForm extends Form {
         const token = this.props.match.params.token;
       await rePassConfirmService.reset_password_confirm(uid, token, this.state.data);
 
-      // const { state } = this.props.location;
-      // window.location = state ? state.from.pathname : "/";
+      window.location = "/password-changed";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

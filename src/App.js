@@ -6,6 +6,7 @@ import MovieForm from "./components/movieForm";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
+import waitForApproval from "./components/waitForApproval";
 import NavBar from "./components/navBar";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
@@ -20,6 +21,9 @@ import UserResultForm from "./components/userResultsForm";
 import ExamQuestionForm from './components/examQuestionForm';
 import ChangeStudentInformationForm from "./components/ChangeStudentInformationForm";
 import Logout from "./components/logout";
+import needToLogout from "./components/needToLogout";
+import emailSent from "./components/emailSent";
+import passwordChanged from "./components/passwordChanged";
 import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
@@ -72,6 +76,10 @@ class App extends Component {
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound} />
+            <Route path="/wait-For-Approval" component={waitForApproval} />
+            <Route path="/need-to-logout" component={needToLogout} />
+            <Route path="/email-sent" component={emailSent} />
+            <Route path="/password-changed" component={passwordChanged} />
             <Redirect from="/" exact to="/exams" />
             <Redirect to="/not-found" />
           </Switch>

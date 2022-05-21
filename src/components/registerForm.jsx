@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import auth from "../services/authService";
 import * as usercreateService from "../services/usercreateService";
+import { apiUrl } from "../config.json";
 
 
 
@@ -43,11 +44,32 @@ class RegisterForm extends Form {
     try {
       const response = await usercreateService.register(this.state.data);
       if (response){
-        const user = this.state.data.username;
-        const pass = this.state.data.password;
-        await auth.login(user, pass);
+        const thisuser = this.state.data.username;
+        const thispass = this.state.data.password;
+        await auth.login(thisuser, thispass);
+
+        const user = auth.getCurrentUser();
+        console.log(user.is_staff);
+        console.log(user.profile_type);
+        if(user.profile_type === "PRF")
+        {
+          console.log("entered2");
+          if(user.is_staff)
+          {
+            console.log("entered3");
+            window.location = apiUrl + "/admin/"
+          }
+          else
+          {
+            window.location = "/wait-For-Approval"
+          }
+        }
+        else
+        {
+          window.location = "/edit-student-information";
+        }
         
-        window.location = "/edit-student-information";
+        
 
         
       }
@@ -55,6 +77,7 @@ class RegisterForm extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
+        console.log(ex.response);
         errors.username = ex.response.data.username;
         errors.email = ex.response.data.email;
         errors.password = ex.response.data.password;
@@ -64,6 +87,7 @@ class RegisterForm extends Form {
   };
 
   render() {
+    if (auth.getCurrentUser()){ window.location="/need-to-logout"}
     return (
       <div>
         <h1>Register</h1>

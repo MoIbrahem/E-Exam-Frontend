@@ -21,9 +21,7 @@ class ResetpasswordForm extends Form {
     try {
       
       await resetpasswordService.reset_password(this.state.data);
-
-      // const { state } = this.props.location;
-      // window.location = state ? state.from.pathname : "/";
+      window.location = "/email-sent"
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

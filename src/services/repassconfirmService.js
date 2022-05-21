@@ -9,5 +9,5 @@ export function reset_password_confirm(uid, token, user) {
     token: token,
     new_password: user.new_password,
     re_new_password: user.re_new_password
-  });
+  },{headers:{Authorization:""}});
 }

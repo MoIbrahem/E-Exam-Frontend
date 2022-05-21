@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getExamStatus } from "../services/examService";
 import { Link } from "react-router-dom";
 import auth from "../services/authService";
+import { apiUrl } from "../config.json";
 
 class StudentExamForm extends Component {
   state = {
@@ -27,6 +28,21 @@ class StudentExamForm extends Component {
     }
   }
   render() {
+    if(auth.getCurrentUser()){
+      const user = auth.getCurrentUser();
+        if(user.profile_type === "PRF")
+        {
+          if(user.is_staff)
+          {
+            window.location = apiUrl + "/admin/"
+          }
+          else
+          {
+            window.location = "/wait-For-Approval"
+          }
+        }
+    }
+    
     const result = this.state.exams;
     console.log(result);
 
