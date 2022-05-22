@@ -29,7 +29,11 @@ class UserResultForm extends Component {
       <div>
         <h1>Results</h1>
         <h2>{this.state.student.first_name} {this.state.student.last_name}</h2>
+        <div class="row">
+        
+        
         {this.state.result.map((studentResults) => (
+          <div class="col-sm-4">
           <table className="card" key={studentResults.exam.id}>
             <tbody className="card-body">
               <tr>
@@ -64,8 +68,12 @@ class UserResultForm extends Component {
               </tr>
             </tbody>
           </table>
+          </div>
         ))}
       </div>
+      </div>
+      
+      
     );
   }
 }
