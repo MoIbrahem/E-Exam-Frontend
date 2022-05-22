@@ -55,13 +55,27 @@ class StudentExamForm extends Component {
 
     if (result) {
       return (
+        // <div>
+        //   
+        // </div>
         <div>
-          {result.map((exam) => (
-            <div key={exam.id}>
-              <Link to={`/exams/exam/${exam.id}`} key={exam.id}>
-                {exam.title} {moment(exam.starts_at).format("llll")}{" "}
-                {exam.subject["title"]}
-              </Link>
+            {result.map((exam) => (
+          <div className="card" key={exam.id}>
+              <div onClick={()=>{
+                      this.props.history.push(`/exams/exam/${exam.id}`);
+              
+              }} className = "card-body" style={{cursor: "pointer"}} >
+                  <h2 className="card-title">
+                  {exam.title}
+                  </h2>
+                      <b>Subject: </b>{exam.subject["title"]}<br/>
+                      <b>Starts at: </b>{moment(exam.starts_at).format("llll")}<br/>
+                      <b>Ends at: </b>{moment(exam.ends_at).format("llll")}
+                 {/* <Link to={`/exams/exam/${exam.id}`} key={exam.id}>
+                  {exam.title} {moment(exam.starts_at).format("llll")}{" "}
+                  {exam.subject["title"]}
+                </Link> */}
+              </div>
             </div>
           ))}
         </div>

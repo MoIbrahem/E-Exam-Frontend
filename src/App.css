@@ -22,6 +22,38 @@
   font-size: large;
 }
 
+.card {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  margin: 12px;
+
+}
+.card:hover,
+.card:focus,
+.card:active {
+  transform: scale(1.1);
+}
+
+.card-body{
+  cursor: "pointer";
+  background-color: #f0efef;
+
+}
+
+.take-exam{
+  margin: auto;
+  text-align: left;
+}
+
+.table-exam{
+  
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
