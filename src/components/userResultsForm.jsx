@@ -1,13 +1,22 @@
 import React, { Component } from "react";
-import { getUserResult, getUser } from "../services/userService";
+import Pagination from "./common/pagination";
 import auth from "../services/authService";
+import { getUserResult, getUser } from "../services/userService";
+import { paginate } from "../utils/paginate";
+
 
 class UserResultForm extends Component {
   state = {
+    currentPage: 1,
+    pageSize: 1,
     result: [],
     student: {},
     loading: true,
     errors: {},
+  };
+
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
   };
 
   async componentDidMount() {
@@ -23,25 +32,28 @@ class UserResultForm extends Component {
   }
 
   render() {
-    if (this.state.result.length === 0) {
+    const { result, student, pageSize, currentPage} = this.state;
+    const results = paginate(result, currentPage, pageSize);
+
+    if (result.length === 0) {
       return (
         <div>
           <h1>Results</h1>
           <h2>
-            {this.state.student.first_name} {this.state.student.last_name}
+            {student.first_name} {student.last_name}
           </h2>
           <div>You have no results yet!</div>
         </div>
       );
     }
     return (
-      <div>
+      <React.Fragment>
         <h1>Results</h1>
         <h2>
-          {this.state.student.first_name} {this.state.student.last_name}
+          {student.first_name} {student.last_name}
         </h2>
         <div className="row">
-          {this.state.result.map((studentResults) => (
+          {results.map((studentResults) => (
             <div className="col-sm-4" key={studentResults.exam.id}>
               <table className="card enabled_hover">
                 <tbody className="card-body">
@@ -82,7 +94,13 @@ class UserResultForm extends Component {
             </div>
           ))}
         </div>
-      </div>
+        <Pagination
+            itemsCount={result.length}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
+      </React.Fragment>
     );
   }
 }

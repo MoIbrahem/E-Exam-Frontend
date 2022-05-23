@@ -3,10 +3,9 @@ import { toast } from "react-toastify";
 import { getExam, answerSubmit } from "../services/examService";
 import auth from "../services/authService";
 import Form from "./common/form";
+import { apiUrl } from "../config.json";
 import { getExamQuestion } from "./../services/examService";
 import ExamResult from "./examResult";
-
-
 
 class ExamQuestionForm extends Form {
   state = {
@@ -30,7 +29,10 @@ class ExamQuestionForm extends Form {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
-        this.setState({ errors, errorData: ex.response.data.exam__id });
+        this.setState({
+          errors,
+          errorData: [ex.response.data.exam__id, ex.response.data],
+        });
       } else if (ex.response && ex.response.status === 401) {
         auth.refreshJwt();
       }
@@ -78,11 +80,15 @@ class ExamQuestionForm extends Form {
   };
 
   render() {
-    const { response, submit, loading, submitted,errorData } = this.state;
+    const { response, submit, loading, submitted, errorData } = this.state;
 
     if (loading) {
       if (errorData.length !== 0) {
-        return <div>{errorData}</div>;
+        return errorData[0] ? (
+          <div> {errorData[0]}</div>
+        ) : (
+          <div> {errorData}</div>
+        );
       } else {
         return <div>loading...</div>;
       }
@@ -92,7 +98,9 @@ class ExamQuestionForm extends Form {
       return (
         <form onSubmit={this.handleSubmit}>
           <div className="card">
-          <div class="card-header"><h2>{this.state.exam.title} </h2></div>
+            <div className="card-header">
+              <h2>{this.state.exam.title} </h2>
+            </div>
             {response.map(
               (examQuestion) => (
                 submit.student_answer.push({
@@ -100,30 +108,44 @@ class ExamQuestionForm extends Form {
                   answers: [],
                 }),
                 (
-                  <li className="card" key={response.indexOf(examQuestion)} type = "1">
-                      {response.indexOf(examQuestion) + 1} : {examQuestion.title}
-                      <ul>
-                        {examQuestion.answer.map((answers) => (
-                          
-                          <li key={answers.id} type="A">
-                            <div class="inputGroup">
-                            <input
-                              type={examQuestion.type["inputType"]}
-                              className={examQuestion.type["inputType"]}
-                              id={answers.id}
-                              value={answers.id}
-                              name={response.indexOf(examQuestion)}
-                              qindex={response.indexOf(examQuestion)}
-                              qid={examQuestion.id}
-                              onChange={this.handleChoice}
-                              onClick={this.handleChoice}
-                            />
-                            {answers.title}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
+                  <div className="card" key={response.indexOf(examQuestion)}>
+                    <div className="row">
+                      <div className="column">
+                        {response.indexOf(examQuestion) + 1} :{" "}
+                        {examQuestion.title}
+                        <ul>
+                          {examQuestion.answer.map((answers) => (
+                            <li key={answers.id} type="A">
+                              <div className="inputGroup">
+                                <input
+                                  type={examQuestion.type["inputType"]}
+                                  className={examQuestion.type["inputType"]}
+                                  id={answers.id}
+                                  value={answers.id}
+                                  name={response.indexOf(examQuestion)}
+                                  qindex={response.indexOf(examQuestion)}
+                                  qid={examQuestion.id}
+                                  onChange={this.handleChoice}
+                                  onClick={this.handleChoice}
+                                />
+                                {answers.title}
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="column-image">
+                        {examQuestion.images[0] ? (
+                          <img
+                            src={apiUrl + examQuestion.images[0].image}
+                            height={150}
+                            width={150}
+                            alt=""
+                          />
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
                 )
               )
             )}

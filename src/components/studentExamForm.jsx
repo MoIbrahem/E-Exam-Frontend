@@ -1,17 +1,26 @@
 import React, { Component } from "react";
 import moment from "moment";
-import { getExamStatus } from "../services/examService";
 import auth from "../services/authService";
+import Pagination from "./common/pagination";
+import { getExamStatus } from "../services/examService";
+import { paginate } from "../utils/paginate";
 import { apiUrl } from "../config.json";
 
 class StudentExamForm extends Component {
   state = {
+    currentPage: 1,
+    pageSize: 1,
     exams: {},
     loading: true,
     errors: {},
     ex: {},
     errorData: [],
   };
+
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
   async componentDidMount() {
     try {
       const { data: exams } = await getExamStatus();
@@ -25,7 +34,13 @@ class StudentExamForm extends Component {
       }
     }
   }
+
   render() {
+    const result = this.state.exams;
+    const { pageSize, currentPage } = this.state;
+    const exams = paginate(result, currentPage, pageSize);
+
+
     if (auth.getCurrentUser()) {
       const user = auth.getCurrentUser();
       if (user.profile_type === "PRF") {
@@ -37,7 +52,6 @@ class StudentExamForm extends Component {
       }
     }
 
-    const result = this.state.exams;
 
     if (this.state.loading) {
       if (this.state.errorData.length !== 0) {
@@ -53,31 +67,39 @@ class StudentExamForm extends Component {
 
     if (result) {
       return (
-        <div className="row">
-          {result.map((exam) => (
-            <div className="col-sm-4" key={exam.id}>
-              <div className="card enabled_hover">
-                <div
-                  onClick={() => {
-                    this.props.history.push(`/exams/exam/${exam.id}`);
-                  }}
-                  className="card-body"
-                  style={{ cursor: "pointer" }}
-                >
-                  <h2 className="card-title">{exam.title}</h2>
-                  <b>Subject: </b>
-                  {exam.subject["title"]}
-                  <br />
-                  <b>Starts at: </b>
-                  {moment(exam.starts_at).format("llll")}
-                  <br />
-                  <b>Ends at: </b>
-                  {moment(exam.ends_at).format("llll")}
+        <React.Fragment>
+          <div className="row">
+            {exams.map((exam) => (
+              <div className="col-sm-4" key={exam.id}>
+                <div className="card enabled_hover">
+                  <div
+                    onClick={() => {
+                      this.props.history.push(`/exams/exam/${exam.id}`);
+                    }}
+                    className="card-body"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <h2 className="card-title">{exam.title}</h2>
+                    <b>Subject: </b>
+                    {exam.subject["title"]}
+                    <br />
+                    <b>Starts at: </b>
+                    {moment(exam.starts_at).format("llll")}
+                    <br />
+                    <b>Ends at: </b>
+                    {moment(exam.ends_at).format("llll")}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+          <Pagination
+            itemsCount={result.length}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
+        </React.Fragment>
       );
     }
   }

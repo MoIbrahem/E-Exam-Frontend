@@ -71,6 +71,9 @@
   text-justify: 50px;
 }
 
+.pagination {
+  text-align: bottom;
+}
 
 
 @keyframes App-logo-spin {
