@@ -135,14 +135,16 @@ class ExamQuestionForm extends Form {
                         </ul>
                       </div>
                       <div className="column-image">
-                        {examQuestion.images[0] ? (
-                          <img
-                            src={apiUrl + examQuestion.images[0].image}
-                            height={150}
-                            width={150}
-                            alt=""
-                          />
-                        ) : null}
+                        {examQuestion.images[0]
+                          ? examQuestion.images.map((image) => (
+                              <img
+                                src={apiUrl + image.image}
+                                height={150}
+                                width={150}
+                                alt=""
+                              />
+                            ))
+                          : null}
                       </div>
                     </div>
                   </div>
