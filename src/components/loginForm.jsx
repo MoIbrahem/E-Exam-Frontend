@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import auth, { getCurrentUser } from "../services/authService";
@@ -8,55 +8,33 @@ import { apiUrl } from "../config.json";
 class LoginForm extends Form {
   state = {
     data: { username: "", password: "" },
-    errors: {}
+    errors: {},
   };
 
   schema = {
-    username: Joi.string()
-      .required()
-      .label("Username"),
-    password: Joi.string()
-      .required()
-      .label("Password")
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
   };
 
   doSubmit = async () => {
     try {
       const { data } = this.state;
       await auth.login(data.username, data.password);
-      
 
-        const user = await getCurrentUser();
-        console.log(user.is_staff);
-        console.log(user.profile_type);
-        if(user.profile_type === "PRF")
-        {
-          console.log("entered2");
-          if(user.is_staff)
-          {
-            console.log("entered3");
-            window.location = apiUrl + "/admin/"
-          }
-          else
-          {
-            window.location = "/wait-For-Approval"
-          }
+      const user = await getCurrentUser();
+      if (user.profile_type === "PRF") {
+        if (user.is_staff) {
+          window.location = apiUrl + "/admin/";
+        } else {
+          window.location = "/wait-For-Approval";
         }
-        else
-        {
-          console.log("entered3");
-          const { state } = this.props.location;
-          window.location = state ? state.from.pathname : "/";
-        }
-
-
-      
-      
-      
+      } else {
+        const { state } = this.props.location;
+        window.location = state ? state.from.pathname : "/";
+      }
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         const errors = { ...this.state.errors };
-        console.log(ex.response);
         errors.username = ex.response.data.detail;
         errors.password = ex.response.data["detail"];
         this.setState({ errors });
@@ -65,28 +43,20 @@ class LoginForm extends Form {
   };
 
   render() {
-    if(getCurrentUser()){
+    if (getCurrentUser()) {
       const user = getCurrentUser();
-        if(user.profile_type === "PRF")
-        {
-          if(user.is_staff)
-          {
-            window.location = apiUrl + "/admin/"
-          }
-          else
-          {
-            window.location = "/wait-For-Approval"
-          }
+      if (user.profile_type === "PRF") {
+        if (user.is_staff) {
+          window.location = apiUrl + "/admin/";
+        } else {
+          window.location = "/wait-For-Approval";
         }
-        else
-        {
-          return <Redirect to="/" />;
-        }
+      } else {
+        return <Redirect to="/" />;
+      }
     }
-    
-    // if (auth.getCurrentUser()) return <Redirect to="/" />;
 
-    
+    // if (auth.getCurrentUser()) return <Redirect to="/" />;
 
     return (
       <div>
@@ -99,7 +69,8 @@ class LoginForm extends Form {
             Don't have an account? <Link to="/register">Sign Up</Link>
           </p>
           <p className="mt-3">
-            Forgot your Password? <Link to="/reset-password">Reset Password</Link>
+            Forgot your Password?{" "}
+            <Link to="/reset-password">Reset Password</Link>
           </p>
         </form>
       </div>
