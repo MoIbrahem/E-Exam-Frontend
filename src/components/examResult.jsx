@@ -15,7 +15,7 @@ class ExamResult extends Component {
       <div>
         <h2>{user.first_name + " " + user.last_name}</h2>
         <h5>This is your result for this exam!</h5>
-        <table className="card">
+        <table className="card enabled_hover">
           <tbody className="card-body">
             <tr>
               <th>

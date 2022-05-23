@@ -56,7 +56,7 @@ class StudentExamForm extends Component {
         <div className="row">
           {result.map((exam) => (
             <div className="col-sm-4" key={exam.id}>
-              <div className="card">
+              <div className="card enabled_hover">
                 <div
                   onClick={() => {
                     this.props.history.push(`/exams/exam/${exam.id}`);

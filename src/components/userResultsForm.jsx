@@ -43,7 +43,7 @@ class UserResultForm extends Component {
         <div className="row">
           {this.state.result.map((studentResults) => (
             <div className="col-sm-4" key={studentResults.exam.id}>
-              <table className="card">
+              <table className="card enabled_hover">
                 <tbody className="card-body">
                   <tr>
                     <th>

@@ -88,7 +88,7 @@ class subjectExamForm extends Form {
       //   </table>
       //   </form>
       <div className="card text-center">
-          <div class="card-header"><h2>{title} </h2></div>
+          <div class="card-header"><h2>{this.state.exam.title} </h2></div>
         <div class="card-body-exam">
         <div><h4> Starts_at: {moment(starts_at).format("llll")}</h4></div>
         <div><h4> Ends_at: {moment(ends_at).format("llll")}</h4></div>

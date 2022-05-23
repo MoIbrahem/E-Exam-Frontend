@@ -73,24 +73,6 @@
 
 
 
-input[type="checkbox"] {
-  display: none;
-}
-
-label{
-  position: relative;
-}
-
-label::before{
-  content: "";
-}
-
-
-/* .radio{
-  display: block;
-  position: inline;
- 
-} */
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

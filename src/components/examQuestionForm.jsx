@@ -118,7 +118,7 @@ class ExamQuestionForm extends Form {
                               onChange={this.handleChoice}
                               onClick={this.handleChoice}
                             />
-                            <label for={answers.id} >{answers.title}</label>
+                            {answers.title}
                             </div>
                           </li>
                         ))}
