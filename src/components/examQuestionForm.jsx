@@ -142,7 +142,7 @@ class ExamQuestionForm extends Form {
         </form>
       );
     } else {
-      return <div>{this.state.ansResponseData.data[0].score}</div>;
+      return <ExamResult ansResponseData={this.state.ansResponseData}/>;
     }
   }
 }
