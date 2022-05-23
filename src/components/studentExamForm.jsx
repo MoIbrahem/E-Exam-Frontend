@@ -10,7 +10,7 @@ class StudentExamForm extends Component {
     loading: true,
     errors: {},
     ex: {},
-    data: [],
+    errorData: [],
   };
   async componentDidMount() {
     try {
@@ -19,7 +19,7 @@ class StudentExamForm extends Component {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
-        this.setState({ errors, data: ex.response.data[0] });
+        this.setState({ errors, errorData: ex.response.data[0] });
       } else if (ex.response && ex.response.status === 401) {
         auth.refreshJwt();
       }
@@ -40,8 +40,8 @@ class StudentExamForm extends Component {
     const result = this.state.exams;
 
     if (this.state.loading) {
-      if (this.state.data.length !== 0) {
-        return <div>{this.state.data}</div>;
+      if (this.state.errorData.length !== 0) {
+        return <div>{this.state.errorData}</div>;
       } else {
         return <div>loading...</div>;
       }
@@ -53,10 +53,10 @@ class StudentExamForm extends Component {
 
     if (result) {
       return (
-        <div class="row">
+        <div className="row">
           {result.map((exam) => (
-            <div class="col-sm-4">
-              <div className="card" key={exam.id}>
+            <div className="col-sm-4" key={exam.id}>
+              <div className="card">
                 <div
                   onClick={() => {
                     this.props.history.push(`/exams/exam/${exam.id}`);

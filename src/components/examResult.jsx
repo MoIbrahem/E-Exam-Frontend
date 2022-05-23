@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getCurrentUser } from "./../services/authService";
 
 class ExamResult extends Component {
@@ -6,20 +7,14 @@ class ExamResult extends Component {
     ansResponseData: {},
   };
 
-  // async componentDidMount(){
-  //   const user = await getCurrentUser();
-  //   this.setState({user});
-  // }
-
   render() {
     const user = getCurrentUser();
     const { ansResponseData } = this.props;
     console.log(ansResponseData.data[0]);
     return (
       <div>
-        <h2>{user.first_name + " " + user.last_name}
-         </h2>
-         <h5>This is your result for this exam!</h5>
+        <h2>{user.first_name + " " + user.last_name}</h2>
+        <h5>This is your result for this exam!</h5>
         <table className="card">
           <tbody className="card-body">
             <tr>
@@ -57,6 +52,7 @@ class ExamResult extends Component {
             </tr>
           </tbody>
         </table>
+        To see this result again with all your results <Link to="/profile/results">click here</Link>
       </div>
     );
   }

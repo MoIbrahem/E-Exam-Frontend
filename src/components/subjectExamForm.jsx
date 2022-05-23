@@ -60,16 +60,16 @@ class subjectExamForm extends Form {
   };
 
   render() {
-    const { title, starts_at, ends_at, subject } = this.state.exam;
+    const { starts_at, ends_at, subject } = this.state.exam;
     if (this.state.loading) {
       return <div>loading...</div>;
     }
 
     return (
       <form onSubmit={this.handleSubmit}>
-      <table className="Table-exam">
+        <table className="Table-exam">
           <tbody>
-          <tr>
+            <tr>
               <td>Title: {subject["title"]}</td>
             </tr>
             <tr>
@@ -86,17 +86,7 @@ class subjectExamForm extends Form {
             </tr>
           </tbody>
         </table>
-        </form>
-      // <div className="take-exam">
-      //   <div>{title}</div>
-      //   <div>{moment(starts_at).format("llll")}</div>{" "}
-      //   <div>{moment(ends_at).format("llll")}</div>
-      //   <div>{subject["title"]}</div>
-      //   <div>{subject["hours"]}</div>
-      //   <form onSubmit={this.handleSubmit}>
-      //     {this.renderButton("Take Exam")}
-      //   </form>
-      // </div>
+      </form>
     );
   }
 }
