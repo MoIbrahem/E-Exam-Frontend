@@ -60,7 +60,7 @@ class subjectExamForm extends Form {
   };
 
   render() {
-    const { title, starts_at, ends_at, subject } = this.state.exam;
+    const { starts_at, ends_at, subject } = this.state.exam;
     if (this.state.loading) {
       return <div>loading...</div>;
     }
