@@ -6,6 +6,8 @@ import Form from "./common/form";
 import { getExamQuestion } from "./../services/examService";
 import ExamResult from "./examResult";
 
+
+
 class ExamQuestionForm extends Form {
   state = {
     submit: {
@@ -104,7 +106,8 @@ class ExamQuestionForm extends Form {
     if (submitted === false) {
       return (
         <form onSubmit={this.handleSubmit}>
-          <div>
+          <div className="card">
+          <div class="card-header"><h2>{this.state.exam.title} </h2></div>
             {response.map(
               (examQuestion) => (
                 // eslint-disable-next-line
@@ -113,11 +116,13 @@ class ExamQuestionForm extends Form {
                   answers: [],
                 }),
                 (
-                  <li key={response.indexOf(examQuestion)} type = "1">
-                      {examQuestion.title}
+                  <li className="card" key={response.indexOf(examQuestion)} type = "1">
+                      {response.indexOf(examQuestion) + 1} : {examQuestion.title}
                       <ul>
                         {examQuestion.answer.map((answers) => (
+                          
                           <li key={answers.id} type="A">
+                            <div class="inputGroup">
                             <input
                               type={examQuestion.type["inputType"]}
                               className={examQuestion.type["inputType"]}
@@ -129,16 +134,17 @@ class ExamQuestionForm extends Form {
                               onChange={this.handleChoice}
                               onClick={this.handleChoice}
                             />
-                            {answers.title}
+                            <label for={answers.id} >{answers.title}</label>
+                            </div>
                           </li>
                         ))}
                       </ul>
-                  </li>
+                    </li>
                 )
               )
             )}
           </div>
-          {this.renderButton("submit")}
+          <center>{this.renderButton("submit")}</center>
         </form>
       );
     } else {

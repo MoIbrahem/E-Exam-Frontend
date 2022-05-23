@@ -66,40 +66,42 @@ class subjectExamForm extends Form {
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
-      <table className="Table-exam">
-          <tbody>
-          <tr>
-              <td>Title: {subject["title"]}</td>
-            </tr>
-            <tr>
-              <td>starts_at: {moment(starts_at).format("llll")}</td>
-            </tr>
-            <tr>
-              <td>ends_at: {moment(ends_at).format("llll")}</td>
-            </tr>
-            <tr>
-              <td>Hours:{subject["hours"]}</td>
-            </tr>
-            <tr>
-              <td>{this.renderButton("Take Exam")}</td>
-            </tr>
-          </tbody>
-        </table>
-        </form>
-      // <div className="take-exam">
-      //   <div>{title}</div>
-      //   <div>{moment(starts_at).format("llll")}</div>{" "}
-      //   <div>{moment(ends_at).format("llll")}</div>
-      //   <div>{subject["title"]}</div>
-      //   <div>{subject["hours"]}</div>
-      //   <form onSubmit={this.handleSubmit}>
-      //     {this.renderButton("Take Exam")}
+      // <form onSubmit={this.handleSubmit}>
+      // <table className="table-card" >
+      //     <tbody>
+      //     <tr>
+      //         <td> <h4> Title: {subject["title"]} </h4></td>
+      //       </tr>
+      //       <tr>
+      //         <td> <h4> Starts_at: {moment(starts_at).format("llll")} </h4></td>
+      //       </tr>
+      //       <tr>
+      //         <td> <h4> Ends_at: {moment(ends_at).format("llll")} </h4> </td>
+      //       </tr>
+      //       <tr>
+      //         <td><h4> Hours: {subject["hours"]} </h4></td>
+      //       </tr>
+      //       <tr>
+      //         <td><h2> {this.renderButton("Take Exam")} </h2></td>
+      //       </tr>
+      //     </tbody>
+      //   </table>
       //   </form>
-      // </div>
+      <div className="card text-center">
+          <div class="card-header"><h2>{title} </h2></div>
+        <div class="card-body-exam">
+        <div><h4> Starts_at: {moment(starts_at).format("llll")}</h4></div>
+        <div><h4> Ends_at: {moment(ends_at).format("llll")}</h4></div>
+        <div><h4>Title: {subject["title"]} </h4></div>
+        <div><h4>Hours: {subject["hours"]}</h4></div>        
+        <form onSubmit={this.handleSubmit}>
+          {this.renderButton("Take Exam")}
+        </form>
+        </div>
+      </div>
+      
     );
   }
 }
-// }
 
 export default subjectExamForm;

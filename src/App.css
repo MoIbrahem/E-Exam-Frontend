@@ -32,14 +32,29 @@
   transition-duration: 0.3s;
   transition-property: transform;
   margin: 12px;
-
 }
-.card:hover,
+/* .card:hover,
 .card:focus,
 .card:active {
   transform: scale(1.1);
-}
+} */
 
+/* .card_enabled_hover{
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  margin: 12px;
+} */
+.enabled_hover:hover,
+.enabled_hover:focus,
+.card_enabled_hover:active {
+  transform: scale(1.1);
+}
 .card-body{
   cursor: "pointer";
   background-color: #f0efef;
@@ -51,9 +66,31 @@
   text-align: left;
 }
 
-.table-exam{
-  
+.card-body-exam{
+  margin: 50px;
+  text-justify: 50px;
 }
+
+
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label{
+  position: relative;
+}
+
+label::before{
+  content: "";
+}
+
+
+/* .radio{
+  display: block;
+  position: inline;
+ 
+} */
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
