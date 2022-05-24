@@ -16,45 +16,45 @@ class About extends Component {
         </div>
 
         <div className="card extra-padding">
-          <div class="card-deck">
-            <div class="card enabled_hover">
-              <img src={hema} class="card-img-top" alt="..."></img>
-              <div class="card-body">
-                <h5 class="card-title">Mohamed Ibrahem</h5>
-                <p class="card-text">Backend and Dtabase.</p>
-                <p class="card-text">
-                  <small class="text-muted">Team Leader</small>
+          <div className="card-deck">
+            <div className="card enabled_hover">
+              <img src={hema} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Mohamed Ibrahem</h5>
+                <p className="card-text">Backend and Dtabase.</p>
+                <p className="card-text">
+                  <small className="text-muted">Team Leader</small>
                 </p>
               </div>
             </div>
-            <div class="card enabled_hover">
-              <img src={adel} class="card-img-top" alt="..."></img>
-              <div class="card-body">
-                <h5 class="card-title">Mohammed Adel</h5>
-                <p class="card-text">Backend and Dtabase.</p>
-                <p class="card-text">
-                  <small class="text-muted">Team member</small>
+            <div className="card enabled_hover">
+              <img src={adel} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Mohammed Adel</h5>
+                <p className="card-text">Backend and Dtabase.</p>
+                <p className="card-text">
+                  <small className="text-muted">Team member</small>
                 </p>
               </div>
             </div>
-            <div class="card enabled_hover">
-              <img src={hassan} class="card-img-top" alt="..."></img>
-              <div class="card-body">
-                <h5 class="card-title">Hassan Elsayed</h5>
-                <p class="card-text">Frontend and Styling.</p>
-                <p class="card-text">
-                  <small class="text-muted">Team member</small>
+            <div className="card enabled_hover">
+              <img src={hassan} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Hassan Elsayed</h5>
+                <p className="card-text">Frontend and Styling.</p>
+                <p className="card-text">
+                  <small className="text-muted">Team member</small>
                 </p>
               </div>
             </div>
-            <div class="card enabled_hover">
-              <img src={hazem} class="card-img-top" alt="..."></img>
-              <div class="card-body">
-                <h5 class="card-title">Hazem Seif</h5>
-                <p class="card-text">Frontend and Styling.</p>
+            <div className="card enabled_hover">
+              <img src={hazem} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Hazem Seif</h5>
+                <p className="card-text">Frontend and Styling.</p>
 
-                <p class="card-text">
-                  <small class="text-muted">Team member</small>
+                <p className="card-text">
+                  <small className="text-muted">Team member</small>
                 </p>
               </div>
             </div>
