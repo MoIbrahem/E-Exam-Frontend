@@ -169,12 +169,7 @@ class StudentExamForm extends Component {
               />
             </div>
           </div>
-          <Pagination 
-            itemsCount={result.length}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={this.handlePageChange}
-          />
+          
         </React.Fragment>
       );
     }
