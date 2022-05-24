@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Movies from "./components/movies";
-import MovieForm from "./components/movieForm";
 import About from "./components/about";
-import Rentals from "./components/rentals";
 import NotFound from "./components/notFound";
 import waitForApproval from "./components/waitForApproval";
 import NavBar from "./components/navBar";
@@ -70,13 +67,7 @@ class App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/exam-result" component={ExamResult} />
             <Route path="/profile/results" component={UserResultForm} />
-            <ProtectedRoute path="/movies/:id" component={MovieForm} />
-            <Route
-              path="/movies"
-              render={(props) => <Movies {...props} user={this.state.user} />}
-            />
             <Route path="/about" component={About} />
-            <Route path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/wait-For-Approval" component={waitForApproval} />
             <Route path="/need-to-logout" component={needToLogout} />

@@ -108,47 +108,53 @@ class ExamQuestionForm extends Form {
                   answers: [],
                 }),
                 (
-                  <div className="card card-exam" key={response.indexOf(examQuestion)}>
+                  <div
+                    className="card card-exam"
+                    key={response.indexOf(examQuestion)}
+                  >
                     <div className="card-header">
-                        <h6>{response.indexOf(examQuestion) + 1} :{" "}
-                        {examQuestion.title} 
-                        </h6>
-                      </div>
+                      <h6>
+                        {response.indexOf(examQuestion) + 1} :{" "}
+                        {examQuestion.title}
+                      </h6>
+                    </div>
                     <div className="row extra-padding">
                       <div className="column">
-                        
                         <div className="row">
-                        <ul>
-                          {examQuestion.answer.map((answers) => (
-                            <li key={answers.id} type="A">
-                              <div className="inputGroup">
-                                <input
-                                  type={examQuestion.type["inputType"]}
-                                  className={examQuestion.type["inputType"]}
-                                  id={answers.id}
-                                  value={answers.id}
-                                  name={response.indexOf(examQuestion)}
-                                  qindex={response.indexOf(examQuestion)}
-                                  qid={examQuestion.id}
-                                  onChange={this.handleChoice}
-                                  onClick={this.handleChoice}
+                          <ul>
+                            {examQuestion.answer.map((answers) => (
+                              <li key={answers.id} type="A">
+                                <div className="inputGroup">
+                                  <input
+                                    type={examQuestion.type["inputType"]}
+                                    className={examQuestion.type["inputType"]}
+                                    id={answers.id}
+                                    value={answers.id}
+                                    name={response.indexOf(examQuestion)}
+                                    qindex={response.indexOf(examQuestion)}
+                                    qid={examQuestion.id}
+                                    onChange={this.handleChoice}
+                                    onClick={this.handleChoice}
+                                  />
+                                  {answers.title}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="column-image">
+                          {examQuestion.images
+                            ? examQuestion.images.map((image) => (
+                                <img
+                                  key={image.id}
+                                  alt=""
+                                  src={apiUrl + image.image}
+                                  width={400}
                                 />
-                                {answers.title}
-                              </div>
-                            </li>
-                          ))}
-                        </ul>
+                              ))
+                            : null}
+                        </div>
                       </div>
-                      <div className="column-image">
-                        {examQuestion.images[0]
-                          ? examQuestion.images.map((image) => (
-                              <img
-                                src={apiUrl + image.image}
-                                width={400}
-                              />
-                            ))
-                          : null}
-                      </div></div>
                     </div>
                   </div>
                 )
