@@ -7,7 +7,7 @@ const NavBar = ({ user }) => {
       <Link className="navbar-brand" to="/">
         E-Exam
       </Link>
-        
+
       <button
         className="navbar-toggler"
         type="button"
@@ -19,13 +19,13 @@ const NavBar = ({ user }) => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      
-      
+
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <NavLink className="nav-item nav-link" to="/exams">
             My Exams
           </NavLink>
+
           {!user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/login">
@@ -49,6 +49,9 @@ const NavBar = ({ user }) => {
               </NavLink>
             </React.Fragment>
           )}
+          <NavLink className="nav-item nav-link" to="/about">
+            About
+          </NavLink>
         </div>
       </div>
     </nav>
