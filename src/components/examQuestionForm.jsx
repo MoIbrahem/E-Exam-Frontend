@@ -108,7 +108,7 @@ class ExamQuestionForm extends Form {
                   answers: [],
                 }),
                 (
-                  <div className="card" key={response.indexOf(examQuestion)}>
+                  <div className="card card-exam" key={response.indexOf(examQuestion)}>
                     <div className="row">
                       <div className="column">
                         {response.indexOf(examQuestion) + 1} :{" "}

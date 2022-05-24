@@ -9,7 +9,7 @@ import { apiUrl } from "../config.json";
 class StudentExamForm extends Component {
   state = {
     currentPage: 1,
-    pageSize: 1,
+    pageSize: 3,
     exams: {},
     loading: true,
     errors: {},
@@ -93,7 +93,7 @@ class StudentExamForm extends Component {
               </div>
             ))}
           </div>
-          <Pagination
+          <Pagination 
             itemsCount={result.length}
             pageSize={pageSize}
             currentPage={currentPage}
