@@ -101,7 +101,9 @@ class StudentExamForm extends Component {
       const user = auth.getCurrentUser();
       if (user.profile_type === "PRF") {
         if (user.is_staff) {
+          auth.logout();
           window.location = apiUrl + "/admin/";
+          auth.logout();
         } else {
           window.location = "/wait-For-Approval";
         }
