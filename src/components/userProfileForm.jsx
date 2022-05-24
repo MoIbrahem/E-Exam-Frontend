@@ -26,9 +26,15 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Profile</h1>
+      <div className="card">
+         <div className="card-header ">
+         <h1>Profile</h1>
+            </div>
+        <div className="card Detail-card">
+        <div className="card-header">
         <h4>User Information</h4>
+            </div>
+            <div className="row extra-padding">   
         <table>
           <tbody>
             <tr>
@@ -42,18 +48,27 @@ class UserProfile extends Component {
             </tr>
           </tbody>
         </table>
-          <p className="mt-3">
+        </div>
+        <div className="card less-margin">
+        <button className="btn btn-primary" >
+          Change Password
             <Link to="/change-password"
-            className="btn btn-primary"
-            >Change Password</Link>
-            
-          </p>
-          <p className="mt-3">
+            ></Link>
+          </button></div>
+
+          <div className="card less-margin">
+          <button className="btn btn-primary">
+          Update user information
             <Link to="/edit-user"
-            className="btn btn-primary"
-            >Update user information</Link>
-          </p>
-        <h4>Student Information</h4>
+            ></Link>
+          </button></div>
+        </div>
+          
+          <div className="card Detail-card" >   
+          <div className="card-header ">
+          <h4>Student Information</h4>
+            </div>
+            <div className="row extra-padding">   
         <table>
           <tbody>
             <tr>
@@ -78,23 +93,26 @@ class UserProfile extends Component {
           </tbody>
           
         </table>
-        <p className="mt-3">
+        </div> 
+        <div className="card less-margin"> 
+        <button className="btn btn-primary">
+        Update student information
                 <Link
-                  to="/edit-student-information"
-                  className="btn btn-primary"
-                >
-                  Update student information
+                  to="/edit-student-information">
                 </Link>
-        </p>
-        <p className="mt-3">
+        </button>
+        </div>
+        <div className="card less-margin"> 
+        <button className="btn btn-primary">
+        Show Exam Result
                 <Link
-                  to="/profile/results"
-                  className="btn btn-primary"
-                >
-                  Show Exam Result
+                  to="/profile/results">
                 </Link>
-        </p>
+        </button>
+        </div>
       </div>
+      </div>
+
     );
   }
 }
