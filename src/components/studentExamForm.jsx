@@ -3,6 +3,8 @@ import moment from "moment";
 import auth from "../services/authService";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
+import SearchBox from "./searchBox";
+// import _, { filter } from "lodash";
 import { getExamStatus } from "../services/examService";
 import { paginate } from "../utils/paginate";
 import { apiUrl } from "../config.json";
@@ -18,6 +20,7 @@ class StudentExamForm extends Component {
     ex: {},
     errorData: [],
     selectedSubject: null,
+    searchQuery:"",
     subjects: [],
   };
 
@@ -41,6 +44,10 @@ class StudentExamForm extends Component {
     this.setState({ currentPage: page });
   };
 
+  handleSearch = query => {
+    this.setState({ searchQuery: query, selectedSubject: null, currentPage: 1 });
+  };
+
   handleSubjectSelect = (subject) => {
     this.setState({
       selectedSubject: subject,
@@ -49,23 +56,46 @@ class StudentExamForm extends Component {
     });
   };
 
+  getPagedData = () => {
+    const {
+      pageSize,
+      currentPage,
+      // sortColumn,
+      selectedSubject,
+      searchQuery,
+      exams: allExams,
+      
+    } = this.state;
+
+    let filtered = allExams;
+    if (searchQuery)
+      filtered = allExams.filter(e =>
+        e.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else if (selectedSubject && selectedSubject.id)
+      filtered = allExams.filter(s => s.subject.id === selectedSubject.id);
+
+    // const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const exams = paginate(filtered, currentPage, pageSize);
+
+    return { totalCount: filtered.length, data: exams };
+  };
+
   render() {
     const result = this.state.exams;
     const {
       pageSize,
       currentPage,
-      exams: allExams,
       selectedSubject,
       allSubjects,
       loading,
       errorData,
+      searchQuery,
     } = this.state;
 
-    const filtered =
-      selectedSubject && selectedSubject.id
-        ? allExams.filter((s) => s.subject.id === selectedSubject.id)
-        : allExams;
-    const exams = paginate(filtered, currentPage, pageSize);
+    const { totalCount, data: exams } = this.getPagedData();
+
 
     if (auth.getCurrentUser()) {
       const user = auth.getCurrentUser();
@@ -100,10 +130,12 @@ class StudentExamForm extends Component {
                 selectedItem={selectedSubject}
                 onItemSelect={this.handleSubjectSelect}
                 textProperty="title"
-                valueProperty="id"
+                valueProperty="title"
               />
             </div>
             <div className="col">
+          <SearchBox value={searchQuery} onChange={this.handleSearch} />
+
               <div className="row">
                 {exams.map((exam) => (
                   <div className="col-sm-4" key={exam.id}>
@@ -130,7 +162,7 @@ class StudentExamForm extends Component {
                 ))}
               </div>
               <Pagination
-                itemsCount={result.length}
+                itemsCount={totalCount}
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
