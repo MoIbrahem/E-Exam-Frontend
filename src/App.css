@@ -76,7 +76,7 @@
 }
 
 .card-exam{
-  padding: 17px;
+  
   display: inline-block;
   vertical-align: middle;
   transform: translateZ(0);
@@ -87,13 +87,16 @@
   transition-property: transform;
   margin: 12px;
 }
+.extra-padding{
+  padding: 25px;
+}
 
 .column-image{
-  width: auto;
-  height: auto;
+  width: 16;
+  height: 9;
   /* padding: 50px; */
   position: right;
-  size: initial;
+  size: fit;
 }
 
 .radio{

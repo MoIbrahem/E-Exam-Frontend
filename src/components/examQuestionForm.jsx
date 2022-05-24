@@ -109,10 +109,15 @@ class ExamQuestionForm extends Form {
                 }),
                 (
                   <div className="card card-exam" key={response.indexOf(examQuestion)}>
-                    <div className="row">
+                    <div className="card-header">
+                        <h6>{response.indexOf(examQuestion) + 1} :{" "}
+                        {examQuestion.title} 
+                        </h6>
+                      </div>
+                    <div className="row extra-padding">
                       <div className="column">
-                        {response.indexOf(examQuestion) + 1} :{" "}
-                        {examQuestion.title}
+                        
+                        <div className="row">
                         <ul>
                           {examQuestion.answer.map((answers) => (
                             <li key={answers.id} type="A">
@@ -139,13 +144,11 @@ class ExamQuestionForm extends Form {
                           ? examQuestion.images.map((image) => (
                               <img
                                 src={apiUrl + image.image}
-                                height={150}
-                                width={200}
-                                alt=""
+                                
                               />
                             ))
                           : null}
-                      </div>
+                      </div></div>
                     </div>
                   </div>
                 )
