@@ -94,11 +94,11 @@
 }
 
 .column-image{
-  width: 16;
-  height: 9;
-  /* padding: 50px; */
+  
   position: right;
-  size: fit;
+  background-size: cover; 
+  object-fit: cover;
+
 }
 
 .radio{

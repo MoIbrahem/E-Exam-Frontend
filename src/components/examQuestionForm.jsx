@@ -144,7 +144,7 @@ class ExamQuestionForm extends Form {
                           ? examQuestion.images.map((image) => (
                               <img
                                 src={apiUrl + image.image}
-                                
+                                width={400}
                               />
                             ))
                           : null}
