@@ -24,6 +24,7 @@ class LoginForm extends Form {
       const user = await getCurrentUser();
       if (user.profile_type === "PRF") {
         if (user.is_staff) {
+          auth.logout();
           window.location = apiUrl + "/admin/";
         } else {
           window.location = "/wait-For-Approval";
