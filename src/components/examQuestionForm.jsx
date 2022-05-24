@@ -140,7 +140,7 @@ class ExamQuestionForm extends Form {
                               <img
                                 src={apiUrl + image.image}
                                 height={150}
-                                width={150}
+                                width={200}
                                 alt=""
                               />
                             ))
