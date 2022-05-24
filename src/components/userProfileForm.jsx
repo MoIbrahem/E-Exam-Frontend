@@ -49,20 +49,28 @@ class UserProfile extends Component {
           </tbody>
         </table>
         </div>
-        <div className="card less-margin">
-        <button className="btn btn-primary" >
-          Change Password
-            <Link to="/change-password"
-            ></Link>
-          </button></div>
 
-          <div className="card less-margin">
-          <button className="btn btn-primary">
-          Update user information
-            <Link to="/edit-user"
-            ></Link>
-          </button></div>
-        </div>
+        
+        <div className="card less-margin">
+          
+            <Link
+            className=" extra-padding btn btn-primary"
+            to="/change-password">
+            Change Password
+            </Link>
+          </div>
+
+          
+          
+          
+            <Link
+            className=" extra-padding btn btn-primary"
+             to="/edit-user"
+            >
+              Update user information
+            </Link>
+          </div>
+        
           
           <div className="card Detail-card" >   
           <div className="card-header ">
@@ -94,22 +102,19 @@ class UserProfile extends Component {
           
         </table>
         </div> 
-        <div className="card less-margin"> 
-        <button className="btn btn-primary">
-        Update student information
+                <div className="card less-margin">
                 <Link
+                className=" extra-padding btn btn-primary"
                   to="/edit-student-information">
+                    Update student information
                 </Link>
-        </button>
-        </div>
-        <div className="card less-margin"> 
-        <button className="btn btn-primary">
-        Show Exam Result
+                </div>
                 <Link
+                className="extra-padding btn btn-primary"
                   to="/profile/results">
+                    Show Exam Result
                 </Link>
-        </button>
-        </div>
+        
       </div>
       </div>
 
