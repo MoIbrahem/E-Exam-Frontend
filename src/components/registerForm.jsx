@@ -71,6 +71,10 @@ class RegisterForm extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
+          <p><small className="text-muted">*Your password can't be too similar to your other personal information.</small></p>
+          <p><small className="text-muted">*Your password must contain at least 8 characters.</small></p>
+          <p><small className="text-muted">*Your password can't be a commonly used password.</small></p>
+          <p><small className="text-muted">*Your password can't be entirely numeric.</small></p>
           {this.renderInput("email", "Email")}
           {this.renderInput("first_name", "First Name")}
           {this.renderInput("last_name", "Last Name")}
