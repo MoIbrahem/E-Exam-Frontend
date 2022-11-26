@@ -48,6 +48,16 @@ class About extends Component {
               </div>
             </div>
             <div className="card enabled_hover">
+              <img src={hassan} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Hassan Elsayed</h5>
+                <p className="card-text">Frontend and Styling.</p>
+                <p className="card-text">
+                  <small className="text-muted">Team member</small>
+                </p>
+              </div>
+            </div>
+            <div className="card enabled_hover">
               <img src={hazem} className="card-img-top" alt="..."></img>
               <div className="card-body">
                 <h5 className="card-title">Hazem Seif</h5>

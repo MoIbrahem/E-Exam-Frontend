@@ -20,8 +20,9 @@ class StudentExamForm extends Component {
     ex: {},
     errorData: [],
     selectedSubject: null,
-    searchQuery:"",
+    searchQuery: "",
     subjects: [],
+    isAvailable: false,
   };
 
   async componentDidMount() {
@@ -44,8 +45,12 @@ class StudentExamForm extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleSearch = query => {
-    this.setState({ searchQuery: query, selectedSubject: null, currentPage: 1 });
+  handleSearch = (query) => {
+    this.setState({
+      searchQuery: query,
+      selectedSubject: null,
+      currentPage: 1,
+    });
   };
 
   handleSubjectSelect = (subject) => {
@@ -64,16 +69,15 @@ class StudentExamForm extends Component {
       selectedSubject,
       searchQuery,
       exams: allExams,
-      
     } = this.state;
 
     let filtered = allExams;
     if (searchQuery)
-      filtered = allExams.filter(e =>
+      filtered = allExams.filter((e) =>
         e.title.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     else if (selectedSubject && selectedSubject.id)
-      filtered = allExams.filter(s => s.subject.id === selectedSubject.id);
+      filtered = allExams.filter((s) => s.subject.id === selectedSubject.id);
 
     // const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -92,10 +96,10 @@ class StudentExamForm extends Component {
       loading,
       errorData,
       searchQuery,
+      isAvailable,
     } = this.state;
 
     const { totalCount, data: exams } = this.getPagedData();
-
 
     if (auth.getCurrentUser()) {
       const user = auth.getCurrentUser();
@@ -136,7 +140,7 @@ class StudentExamForm extends Component {
               />
             </div>
             <div className="col">
-          <SearchBox value={searchQuery} onChange={this.handleSearch} />
+              <SearchBox value={searchQuery} onChange={this.handleSearch} />
 
               <div className="row">
                 {exams.map((exam) => (
@@ -144,7 +148,13 @@ class StudentExamForm extends Component {
                     <div className="card enabled_hover">
                       <div
                         onClick={() => {
-                          this.props.history.push(`/exams/exam/${exam.id}`);
+                          if (isAvailable) {
+                            this.props.history.push(`/exams/exam/${exam.id}`);
+                          } else {
+                            this.props.history.push(
+                              `/exams/exam/${exam.id}/examquestions`
+                            );
+                          }
                         }}
                         className="card-body"
                         style={{ cursor: "pointer" }}
@@ -171,7 +181,6 @@ class StudentExamForm extends Component {
               />
             </div>
           </div>
-          
         </React.Fragment>
       );
     }
