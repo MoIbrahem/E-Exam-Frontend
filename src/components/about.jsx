@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import hema from "../images/hema.jpeg";
 import hazem from "../images/hazem.jpeg";
 import hassan from "../images/hassan.jpeg";
-import adel from "../images/adel.jpeg";
+import adel2 from "../images/adel2.jpeg";
 
 class About extends Component {
   state = {};
@@ -28,7 +28,7 @@ class About extends Component {
               </div>
             </div>
             <div className="card enabled_hover">
-              <img src={adel} className="card-img-top" alt="..."></img>
+              <img src={adel2} className="card-img-top" alt="..."></img>
               <div className="card-body">
                 <h5 className="card-title">Mohammed Adel</h5>
                 <p className="card-text">Backend and Dtabase.</p>
