@@ -68,12 +68,15 @@ class subjectExamForm extends Form {
     const { errorData, loading } = this.state;
     if (loading) {
       if (errorData.length !== 0) {
-        return errorData[0]? <div> {errorData[0]}</div>: <div> {errorData}</div>
+        return errorData[0] ? (
+          <div> {errorData[0]}</div>
+        ) : (
+          <div> {errorData}</div>
+        );
       } else {
         return <div>loading...</div>;
       }
     }
-
 
     return (
       // <form onSubmit={this.handleSubmit}>
@@ -97,6 +100,7 @@ class subjectExamForm extends Form {
       //     </tbody>
       //   </table>
       //   </form>
+
       <div className="card text-center">
         <div className="card-header">
           <h2>{this.state.exam.title} </h2>
