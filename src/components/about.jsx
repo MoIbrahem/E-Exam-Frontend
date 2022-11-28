@@ -3,9 +3,11 @@ import hema from "../images/hema.jpeg";
 import hazem from "../images/hazem.jpeg";
 import hassan from "../images/hassan.jpeg";
 import adel2 from "../images/adel2.jpeg";
+import abdelmaksoud from "../images/abdelmaksoud.jpeg";
 
 class About extends Component {
   state = {};
+
   render() {
     return (
       <div className="card">
@@ -15,8 +17,28 @@ class About extends Component {
           </center>
         </div>
 
-        <div className="card extra-padding">
+        <div className="card extra-padding-card">
           <div className="card-deck">
+            <div className="card enabled_hover">
+              <img src={abdelmaksoud} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Ahmed Abdelmaksoud</h5>
+                <p className="card-text">Frontend and Styling.</p>
+                <p className="card-text">
+                  <small className="text-muted">Team member</small>
+                </p>
+              </div>
+            </div>
+            <div className="card enabled_hover">
+              <img src={hassan} className="card-img-top" alt="..."></img>
+              <div className="card-body">
+                <h5 className="card-title">Hassan Elsayed</h5>
+                <p className="card-text">Frontend and Styling.</p>
+                <p className="card-text">
+                  <small className="text-muted">Team member</small>
+                </p>
+              </div>
+            </div>
             <div className="card enabled_hover">
               <img src={hema} className="card-img-top" alt="..."></img>
               <div className="card-body">
@@ -37,26 +59,7 @@ class About extends Component {
                 </p>
               </div>
             </div>
-            <div className="card enabled_hover">
-              <img src={hassan} className="card-img-top" alt="..."></img>
-              <div className="card-body">
-                <h5 className="card-title">Hassan Elsayed</h5>
-                <p className="card-text">Frontend and Styling.</p>
-                <p className="card-text">
-                  <small className="text-muted">Team member</small>
-                </p>
-              </div>
-            </div>
-            <div className="card enabled_hover">
-              <img src={hassan} className="card-img-top" alt="..."></img>
-              <div className="card-body">
-                <h5 className="card-title">Hassan Elsayed</h5>
-                <p className="card-text">Frontend and Styling.</p>
-                <p className="card-text">
-                  <small className="text-muted">Team member</small>
-                </p>
-              </div>
-            </div>
+
             <div className="card enabled_hover">
               <img src={hazem} className="card-img-top" alt="..."></img>
               <div className="card-body">

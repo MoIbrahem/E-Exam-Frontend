@@ -92,6 +92,10 @@
   padding: 25px;
 }
 
+.extra-padding-card {
+  padding: 20px;
+}
+
 .column-image {
   position: right;
   background-size: cover;
