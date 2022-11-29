@@ -96,7 +96,6 @@ class StudentExamForm extends Component {
       loading,
       errorData,
       searchQuery,
-      isAvailable,
     } = this.state;
 
     const { totalCount, data: exams } = this.getPagedData();
@@ -148,7 +147,11 @@ class StudentExamForm extends Component {
                     <div className="card enabled_hover">
                       <div
                         onClick={() => {
-                          if (isAvailable) {
+                          var timestamp = Math.floor(Date.now() / 1000);
+                          var ends_at_timestamp = Math.floor(
+                            new Date(exam.ends_at).getTime() / 1000
+                          );
+                          if (ends_at_timestamp > timestamp) {
                             this.props.history.push(`/exams/exam/${exam.id}`);
                           } else {
                             this.props.history.push(
