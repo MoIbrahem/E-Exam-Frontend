@@ -13,6 +13,10 @@ class ExamQuestionForm extends Form {
       exam__id: this.props.match.params.id,
       student_answer: [],
     },
+    exam: {
+      starts_at: "",
+      ends_at: "",
+    },
     loading: true,
     submitted: false,
     errors: {},
@@ -46,7 +50,11 @@ class ExamQuestionForm extends Form {
 
   autoSubmit = () => {
     const currentTimeInSec = Math.floor(Date.now() / 1000);
-    const durationInSec = this.state.exam.endTimeStamp - currentTimeInSec - 60;
+    const durationInSec =
+      Math.floor(new Date(this.state.exam.ends_at).getTime() / 1000) -
+      currentTimeInSec -
+      60 ;
+    console.log(currentTimeInSec, durationInSec);
     if (durationInSec > 1) {
       setTimeout(() => {
         this.doSubmit();
