@@ -43,19 +43,6 @@ class ExamQuestionForm extends Form {
     e.preventDefault();
     this.doSubmit();
   };
-////////////////////////////////////////////////////////////
-  autoSubmit = ()=>{
-    const currentTimeInSec = Math.floor(Date.now()/1000);
-    const durationInSec   = this.state.exam.endTimeStamp -currentTimeInSec - 60;
-    if (durationInSec > 1){
-      console.log(currentTimeInSec,durationInSec);
-      setTimeout(() => {
-        this.doSubmit();
-      },durationInSec*1000);
-    }
-  }
-
-  ///////////////////////////////////////////////////////////////
 
   autoSubmit = () => {
     const currentTimeInSec = Math.floor(Date.now() / 1000);
