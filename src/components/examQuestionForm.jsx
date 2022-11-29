@@ -56,6 +56,17 @@ class ExamQuestionForm extends Form {
   }
 
   ///////////////////////////////////////////////////////////////
+
+  autoSubmit = () => {
+    const currentTimeInSec = Math.floor(Date.now() / 1000);
+    const durationInSec = this.state.exam.endTimeStamp - currentTimeInSec - 60;
+    if (durationInSec > 1) {
+      setTimeout(() => {
+        this.doSubmit();
+      }, durationInSec * 1000);
+    }
+  };
+
   doSubmit = async () => {
     try {
       const ansResponse = await answerSubmit(this.state.submit);
@@ -182,7 +193,5 @@ class ExamQuestionForm extends Form {
     }
   }
 }
-
-// }
 
 export default ExamQuestionForm;
